@@ -1,0 +1,11 @@
+geopandas
+shapely
+fiona
+pyogrio
+matplotlib
+pandas
+numpy
+sqlalchemy
+flask
+scikit-learn
+alembic
