@@ -11,3 +11,11 @@ __pycache__/
 *.log
 Thumbs.db
 .DS_Store
+
+01_duomenys/sklypai/
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.idx
