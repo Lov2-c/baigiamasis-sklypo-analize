@@ -19,3 +19,7 @@ Thumbs.db
 *.prj
 *.cpg
 *.idx
+
+*.gpkg
+01_duomenys/papildomi/
+02_projektas/papildomi/
