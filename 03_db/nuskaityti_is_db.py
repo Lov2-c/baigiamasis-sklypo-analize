@@ -4,41 +4,37 @@ from sqlalchemy.orm import sessionmaker
 from db_modeliai import SklypoAnalize
 
 
-def nuskaityti_visas_analizes():
+def nuskaityti_visus_irasus():
     """
-    Ši funkcija prisijungia prie duomenų bazės
-    ir nuskaito visus sklypų analizės įrašus.
+    Funkcija prisijungia prie DB ir parodo visus įrašus
+    kartu su automatinės analizės rezultatais.
     """
 
-    # Prisijungiame prie SQLite duomenų bazės
     engine = create_engine("sqlite:///03_db/baigiamasis.db")
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Pasiimame visus įrašus iš lentelės
-    irasai = session.query(SklypoAnalize).all()
+    visi_irasai = session.query(SklypoAnalize).all()
 
-    # Jei įrašų nėra
-    if not irasai:
-        print("Duomenų bazėje įrašų nerasta.")
-        session.close()
-        return
+    print(f"Iš viso DB rasta įrašų: {len(visi_irasai)}")
+    print("-" * 100)
 
-    print("=== DUOMENŲ BAZĖS ĮRAŠAI ===")
-
-    # Pereiname per visus įrašus ir juos atspausdiname
-    for irasas in irasai:
-        print(f"\nID: {irasas.id}")
-        print(f"Zona: {irasas.zona_pavadinimas}")
-        print(f"Zonos kodas: {irasas.zonos_kodas}")
-        print(f"Užstatymo intensyvumas: {irasas.uzstatymo_intensyvumas}")
-        print(f"Maksimalus aukštų skaičius: {irasas.max_aukstu_skaicius}")
-        print(f"Pagrindinė paskirtis: {irasas.pagrindine_paskirtis}")
-        print(f"Objekto nr.: {irasas.objekto_nr}")
-        print(f"Preliminari klasė: {irasas.preliminari_klase}")
+    for irasas in visi_irasai:
+        print(f"ID: {irasas.id}")
+        print(f"Sklypo ID: {irasas.sklypo_id}")
+        print(f"Adresas: {irasas.adresas}")
+        print(f"Pagrindinė zona: {irasas.pagrindine_zona_pavadinimas}")
+        print(f"Zona gyvenamoji: {irasas.ar_yra_gyvenamoji_zona}")
+        print(f"Draustinių proc.: {irasas.draustiniu_proc}")
+        print(f"Miško proc.: {irasas.misko_proc}")
+        print(f"Automatinės analizės rezultatas: {irasas.automatines_analizes_rezultatas}")
+        print(f"Ūkininko sodybos išvestis: {irasas.ukininko_sodybos_isvestis}")
+        print(f"Automatinės analizės paaiškinimas: {irasas.automatines_analizes_paaiskinimas}")
+        print(f"Rankinės validacijos būsena: {irasas.rankines_validacijos_statusas}")
+        print("-" * 100)
 
     session.close()
 
 
 if __name__ == "__main__":
-    nuskaityti_visas_analizes()
+    nuskaityti_visus_irasus()
