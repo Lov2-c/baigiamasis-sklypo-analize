@@ -105,7 +105,7 @@ def apskaiciuoti_procentus(sklypu_failas, sluoksnio_failas, isvedimo_failas, pro
 
 if __name__ == "__main__":
     # Sklypų sluoksnis
-    sklypu_failas = r"01_duomenys/sklypai/klaipedos_raj_ribos_2019.shp"
+    sklypu_failas = r"01_duomenys/sklypai/klaipedos_raj_ribos_2019.gpkg"
 
     # Visi analizuojami sluoksniai:
     sluoksniai = [

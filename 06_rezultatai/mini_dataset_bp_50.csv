@@ -1,92 +1,68 @@
 ﻿SKLYPO_ID,UNIKAL_ID,PLOTAS_REG,ADRESAS,PASK_TIP,BP_ZONA_PAV,BP_ZONOS_KODAS,U_INTENS,MAX_AUK_SK,PAGR_PASK,BP_OBJ_NR,SKLYPO_PLOTAS_M2,SUSIKIRTIMO_PLOTAS_M2,SUSIKIRTIMO_PROC
-550100010197,550100010197,1.7004,KlaipÓdos r. sav. LadeikiÖ k.,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,494,17003.73,10504.9,61.78
-550100010197,550100010197,1.7004,KlaipÓdos r. sav. LadeikiÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,477,17003.73,6459.61,37.99
-550100010197,550100010197,1.7004,KlaipÓdos r. sav. LadeikiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,478,17003.73,22.62,0.13
-550100010197,550100010197,1.7004,KlaipÓdos r. sav. LadeikiÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M,567,17003.73,16.6,0.1
-550100020103,440030544016,0.5679,KlaipÓdos r. sav. LaigiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,496,5678.08,5678.08,100.0
-550100020175,440004922389,6.8604,KlaipÓdos r. sav. LaigiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,496,68603.55,68603.55,100.0
-550100020203,440012153229,0.25,KlaipÓdos r. sav. LaigiÖ k. Ablingos g. 25,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,496,2499.9,2499.9,100.0
-550100020204,440012153248,2.9648,KlaipÓdos r. sav. LaigiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,496,29646.94,29646.94,100.0
-550100040082,550100040082,19.4194,KlaipÓdos r. sav. LemguliÖ k.,710,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,481,194195.15,151069.32,77.79
-550100040082,550100040082,19.4194,KlaipÓdos r. sav. LemguliÖ k.,710,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,482,194195.15,43125.84,22.21
-550170010001,440045611389,6.7159,KlaipÓdos r. sav. TickinÖ k.,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,496,67159.34,39598.76,58.96
-550170010001,440045611389,6.7159,KlaipÓdos r. sav. TickinÖ k.,995,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,495,67159.34,27560.58,41.04
-550500010001,550500010001,3.2973,KlaipÓdos r. sav. GedminÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,32972.9,17075.01,51.78
-550500010001,550500010001,3.2973,KlaipÓdos r. sav. GedminÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,32972.9,8135.56,24.67
-550500010001,550500010001,3.2973,KlaipÓdos r. sav. GedminÖ k.,610,Vandenų zona,H_F,0,0,H,169,32972.9,7762.32,23.54
-550500010066,550500010066,1.0202,KlaipÓdos r. sav. BaiNiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,10202.07,8593.6,84.23
-550500010066,550500010066,1.0202,KlaipÓdos r. sav. BaiNiÖ k.,610,Vandenų zona,H_F,0,0,H,169,10202.07,1288.07,12.63
-550500010066,550500010066,1.0202,KlaipÓdos r. sav. BaiNiÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,10202.07,320.4,3.14
-550500010129,440003684515,0.2586,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 55,995,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,2586.87,1202.86,46.5
-550500010129,440003684515,0.2586,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 55,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,186,2586.87,1080.81,41.78
-550500010129,440003684515,0.2586,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 55,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,2586.87,303.19,11.72
-550500010166,440006817283,0.5813,KlaipÓdos r. sav. GedminÖ k.,710,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,5812.9,4925.32,84.73
-550500010166,440006817283,0.5813,KlaipÓdos r. sav. GedminÖ k.,710,Vandenų zona,H_F,0,0,H,169,5812.9,887.58,15.27
-550500010346,440015270596,0.1071,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 53,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,1070.85,1070.85,100.0
-550500010347,440015270663,0.0909,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 51,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,908.96,908.96,100.0
-550500010348,440015271117,0.0909,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 49,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,908.42,908.42,100.0
-550500010349,440015271171,0.0908,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 47,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,908.28,908.28,100.0
-550500010350,440015271239,0.0921,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 45,995,Vandenų zona,H_F,0,0,H,169,921.27,406.27,44.1
-550500010350,440015271239,0.0921,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 45,995,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,921.27,295.39,32.06
-550500010350,440015271239,0.0921,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 45,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,921.27,219.6,23.84
-550500010351,440015272625,0.1199,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 43,995,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,1199.44,650.47,54.23
-550500010351,440015272625,0.1199,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 43,995,Vandenų zona,H_F,0,0,H,169,1199.44,306.09,25.52
-550500010351,440015272625,0.1199,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 43,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,186,1199.44,140.85,11.74
-550500010351,440015272625,0.1199,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 43,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,1199.44,102.03,8.51
-550500010352,440015272736,0.1166,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 41,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,186,1165.98,822.93,70.58
-550500010352,440015272736,0.1166,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 41,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,1165.98,343.05,29.42
-550500010353,440015272782,0.1597,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 39,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,186,1596.92,1009.56,63.22
-550500010353,440015272782,0.1597,KlaipÓdos r. sav. BaiNiÖ k. GedminÖ g. 39,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,1596.92,587.36,36.78
-550500010354,440015272870,0.4368,KlaipÓdos r. sav. BaiNiÖ k.,995,Vandenų zona,H_F,0,0,H,169,4368.11,2054.07,47.02
-550500010354,440015272870,0.4368,KlaipÓdos r. sav. BaiNiÖ k.,995,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,4368.11,1953.12,44.71
-550500010354,440015272870,0.4368,KlaipÓdos r. sav. BaiNiÖ k.,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,4368.11,360.92,8.26
-550500010355,440015272969,0.1752,KlaipÓdos r. sav. BaiNiÖ k.,995,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,1751.19,1448.19,82.7
-550500010355,440015272969,0.1752,KlaipÓdos r. sav. BaiNiÖ k.,995,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,1751.19,160.98,9.19
-550500010355,440015272969,0.1752,KlaipÓdos r. sav. BaiNiÖ k.,995,Vandenų zona,H_F,0,0,H,169,1751.19,142.01,8.11
-550500010393,440018336362,5.9606,KlaipÓdos r. sav. BaiNiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,1;0,8***",0,Z;KT,570,59605.8,26361.35,44.23
-550500010393,440018336362,5.9606,KlaipÓdos r. sav. BaiNiÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,59605.8,24522.81,41.14
-550500010393,440018336362,5.9606,KlaipÓdos r. sav. BaiNiÖ k.,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,186,59605.8,8694.62,14.59
-550500010393,440018336362,5.9606,KlaipÓdos r. sav. BaiNiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,59605.8,27.03,0.05
-550500010608,440045544614,0.4021,KlaipÓdos r. sav. BaiNiÖ k.,710,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,4021.04,3619.1,90.0
-550500010608,440045544614,0.4021,KlaipÓdos r. sav. BaiNiÖ k.,710,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,4021.04,401.94,10.0
-550500010612,440045702309,11.0393,KlaipÓdos r. sav. GedminÖ k.,710,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,110393.5,87044.49,78.85
-550500010612,440045702309,11.0393,KlaipÓdos r. sav. GedminÖ k.,710,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,110393.5,23349.01,21.15
-550500010613,440046423750,56.9338,KlaipÓdos r. sav. GedminÖ k.,710,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,569336.35,534295.25,93.85
-550500010613,440046423750,56.9338,KlaipÓdos r. sav. GedminÖ k.,710,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,569336.35,35041.1,6.15
-550500010614,440046464644,6.7769,KlaipÓdos r. sav. BaiNiÖ k.,710,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,67768.55,64847.93,95.69
-550500010614,440046464644,6.7769,KlaipÓdos r. sav. BaiNiÖ k.,710,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,67768.55,2920.62,4.31
-551000030102,551000030102,23.7775,KlaipÓdos r. sav. AlksniÖ k.,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,404,237775.34,230398.59,96.9
-551000030102,551000030102,23.7775,KlaipÓdos r. sav. AlksniÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M,407,237775.34,7376.75,3.1
-551000030174,551000030174,1.3,KlaipÓdos r. sav. AlksniÖ k. GobergiÕkÓs g. 69,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,404,13000.16,13000.16,100.0
-551000050916,440015766693,0.09,KlaipÓdos r. sav. ¾lapÕilÓs k. LaÕÖ g. 12,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,202,899.86,899.86,100.0
-551000050918,440015766817,0.09,KlaipÓdos r. sav. ¾lapÕilÓs k. LaÕÖ g. 14,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,202,899.98,899.98,100.0
-552500020006,552500020006,7.064,KlaipÓdos r. sav. GirininkÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,70,70639.62,70639.62,100.0
-552800040474,440009418839,0.2,KlaipÓdos r. sav. DarguUiÖ k.,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,101,2000.1,2000.1,100.0
-552800040475,440009419125,0.1792,KlaipÓdos r. sav. DarguUiÖ k.,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,101,1792.07,1792.07,100.0
-552800040479,440009419703,0.2,KlaipÓdos r. sav. DarguUiÖ k.,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,101,1999.91,1999.91,100.0
-552800040480,440009419770,0.2053,KlaipÓdos r. sav. DarguUiÖ k.,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,101,2053.24,2053.24,100.0
-552800040482,440009419974,0.8166,KlaipÓdos r. sav. DarguUiÖ k.,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,101,8165.77,8165.77,100.0
-553500050046,553500050046,2.8431,KlaipÓdos r. sav. Kop×stÖ k.,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,165,28442.24,18123.77,63.72
-553500050046,553500050046,2.8431,KlaipÓdos r. sav. Kop×stÖ k.,995,Pramonės ir sandėliavimo zona,U_PS_F,"2,5",0,KT,369,28442.24,10318.47,36.28
-553500050187,553500050187,111.6,KlaipÓdos r. sav. Kop×stÖ k.,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,165,1117053.31,857396.87,76.76
-553500050187,553500050187,111.6,KlaipÓdos r. sav. Kop×stÖ k.,610,Pramonės ir sandėliavimo zona,U_PS_F,"2,5",0,KT,367,1117053.31,208303.05,18.65
-553500050187,553500050187,111.6,KlaipÓdos r. sav. Kop×stÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M,164,1117053.31,51353.4,4.6
-554400020197,554400020197,4.25,KlaipÓdos r. sav. RimkÖ k.,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,244,42500.47,42500.47,100.0
-554400040281,440009540278,3.0,KlaipÓdos r. sav. DovilÖ mstl.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,229,30000.09,25813.29,86.04
-554400040281,440009540278,3.0,KlaipÓdos r. sav. DovilÖ mstl.,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,226,30000.09,4186.8,13.96
-554400050272,554400050272,4.5,KlaipÓdos r. sav. DovilÖ mstl.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,173,45000.93,16442.64,36.54
-554400050272,554400050272,4.5,KlaipÓdos r. sav. DovilÖ mstl.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,229,45000.93,15422.68,34.27
-554400050272,554400050272,4.5,KlaipÓdos r. sav. DovilÖ mstl.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,45000.93,13135.62,29.19
-554400050579,440031017495,1.1612,KlaipÓdos r. sav. DovilÖ mstl.,710,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,229,11612.15,6299.91,54.25
-554400050579,440031017495,1.1612,KlaipÓdos r. sav. DovilÖ mstl.,710,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,170,11612.15,5312.24,45.75
-554500020170,440046351428,1.8733,KlaipÓdos r. sav. KatkÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,398,18732.31,12153.36,64.88
-554500020170,440046351428,1.8733,KlaipÓdos r. sav. KatkÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M,395,18732.31,6578.95,35.12
-555200030215,440012040767,0.0594,KlaipÓdos r. sav. RokÖ k. Liedo g. 16,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,175,594.11,594.11,100.0
-555800010376,440049320103,0.1491,KlaipÓdos r. sav. AukÕtkiemiÖ k. VÓjÖ g. 16,995,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,378,1490.9,1490.9,100.0
-555800050509,440005118352,3.0,KlaipÓdos r. sav. TruÕeliÖ k.,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,380,30016.31,28453.17,94.79
-555800050509,440005118352,3.0,KlaipÓdos r. sav. TruÕeliÖ k.,610,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,30016.31,1563.14,5.21
-555800050713,440010454201,1.2856,KlaipÓdos r. sav. TruÕeliÖ k.,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,380,12857.73,12857.73,100.0
-555800051221,440015676207,0.0977,KlaipÓdos r. sav. TruÕeliÖ k. Priegliaus g. 38,995,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,380,977.06,977.06,100.0
-555800051224,440015676407,0.5427,KlaipÓdos r. sav. TruÕeliÖ k.,995,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,380,5427.44,4915.1,90.56
-555800051224,440015676407,0.5427,KlaipÓdos r. sav. TruÕeliÖ k.,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,5427.44,512.34,9.44
-556500040083,440003239050,0.7,KlaipÓdos r. sav. MÓUeliÖ k. JokÕÖ g. 12,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,317,6999.79,6999.79,100.0
+550100030117,550100030117,37.79,KlaipÓdos r. sav. PaUvelsio k. LaigiÖ g. 32,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,478,206546.25,206467.83,99.96
+550100030117,550100030117,37.79,KlaipÓdos r. sav. PaUvelsio k. LaigiÖ g. 32,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,477,206546.25,78.42,0.04
+550300080023,550300080023,23.9416,KlaipÓdos r. sav. KantvainÖ k. KantvainÖ g. 20,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,146,51.82,51.82,100.0
+550300080023,550300080023,23.9416,KlaipÓdos r. sav. KantvainÖ k. KantvainÖ g. 20,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,146,144.73,144.73,100.0
+550300080023,550300080023,23.9416,KlaipÓdos r. sav. KantvainÖ k. KantvainÖ g. 20,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,146,239613.11,239607.65,100.0
+550300080023,550300080023,23.9416,KlaipÓdos r. sav. KantvainÖ k. KantvainÖ g. 20,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,144,239613.11,5.46,0.0
+550500010091,550500010091,2.84,KlaipÓdos r. sav. KisiniÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,1;0,8***",0,Z;KT,570,29576.76,29576.75,100.0
+550500010091,550500010091,2.84,KlaipÓdos r. sav. KisiniÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,184,29576.76,0.01,0.0
+550800030286,440022456400,1.395,KlaipÓdos r. sav. PetraiNiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,557,13949.86,13949.86,100.0
+551300010153,551300010153,0.065,KlaipÓdos r. sav. DercekliÖ k. IevÖ g. 15,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,277,598.31,598.31,100.0
+551300040105,551300040105,0.06,KlaipÓdos r. sav. DercekliÖ k. M×Õos g. 14,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,277,610.13,610.13,100.0
+551300130183,551300130183,0.06,KlaipÓdos r. sav. DercekliÖ k. DebesÖ g. 13,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,277,621.57,621.57,100.0
+551300130241,551300130241,0.06,KlaipÓdos r. sav. DercekliÖ k. Nektaro g. 9,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,277,617.62,617.62,100.0
+551300210347,551300210347,0.06,KlaipÓdos r. sav. DercekliÖ k. SodÖ g. 16,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,277,600.38,600.38,100.0
+551500050238,440051125558,0.0561,KlaipÓdos r. sav. SvencelÓs k. VÓjÖ g. 47,995,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,342,561.44,561.44,100.0
+551800070388,440051548979,0.1912,KlaipÓdos r. sav. Endriejavo mstl. LiepÖ g. 26,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,506,1911.81,1911.81,100.0
+552000050022,552000050022,0.1238,KlaipÓdos r. sav. GargUdÖ m. Vytauto g. 59,995,Intensyvaus užstatymo gyvenamoji zona,U_GG_I_F,2,0,KT,197,1237.97,1237.97,100.0
+552000080040,552000080040,0.1233,KlaipÓdos r. sav. GargUdÖ m. Gintaro g. 17,995,Intensyvaus užstatymo gyvenamoji zona,U_GG_I_F,2,0,KT,197,1232.72,1232.72,100.0
+552000180096,552000180096,0.0485,KlaipÓdos r. sav. GargUdÖ m. ObelÖ tak. 11,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,196,485.49,485.49,100.0
+552300040394,440014701236,0.1263,KlaipÓdos r. sav. KlemiÕkÓs II k. BitÓnÖ g. 15,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,1263.09,1263.09,100.0
+552300090379,440051800047,0.032,KlaipÓdos r. sav. KlausmyliÖ vs.,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,320.0,320.0,100.0
+552800010612,440005120864,0.32,KlaipÓdos r. sav. BendikÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05",0,Z;KT,469,3284.23,3284.23,100.0
+552800011049,440051112166,0.8615,KlaipÓdos r. sav. BendikÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05",0,Z;KT,469,8614.81,8614.81,100.0
+552800040488,440009705804,0.2207,KlaipÓdos r. sav. Bruzdeilyno k. Bruzdeilyno g. 20,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,101,2206.67,2206.67,100.0
+552800070731,440015074561,0.2034,KlaipÓdos r. sav. GirkaliÖ k.,995,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,142,2034.16,2034.16,100.0
+553300020190,440005893349,4.8,KlaipÓdos r. sav. MisgiriÖ k.,710,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,533,46470.6,45630.05,98.19
+553300020190,440005893349,4.8,KlaipÓdos r. sav. MisgiriÖ k.,710,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,534,46470.6,840.56,1.81
+553800140008,553800140008,0.2414,KlaipÓdos r. sav. KvietiniÖ k. Minijos g. 27,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,438,2414.14,2414.14,100.0
+553800140063,553800140063,1.0266,KlaipÓdos r. sav. KvietiniÖ k.,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,437,10266.34,10250.3,99.84
+553800140063,553800140063,1.0266,KlaipÓdos r. sav. KvietiniÖ k.,610,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,438,10266.34,16.04,0.16
+554300050185,554300050185,32.53,KlaipÓdos r. sav. RudaiNiÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M,447,336748.48,164237.88,48.77
+554300050185,554300050185,32.53,KlaipÓdos r. sav. RudaiNiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,472,336748.48,143412.25,42.59
+554300050185,554300050185,32.53,KlaipÓdos r. sav. RudaiNiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05",0,Z;KT,448,336748.48,14484.55,4.3
+554300050185,554300050185,32.53,KlaipÓdos r. sav. RudaiNiÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,477,336748.48,13872.5,4.12
+554300050185,554300050185,32.53,KlaipÓdos r. sav. RudaiNiÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M,566,336748.48,621.2,0.18
+554300050185,554300050185,32.53,KlaipÓdos r. sav. RudaiNiÖ k.,610,Miškų ir miškingų teritorijų zona,MI_F,0,0,M,470,336748.48,120.11,0.04
+554400030924,440051957205,0.2591,KlaipÓdos r. sav. BirbinNiÖ k. SapnÖ g. 4,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,231,2591.16,2591.16,100.0
+554400050350,554400050350,1.87,KlaipÓdos r. sav. GalNiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,242,20481.67,20481.67,100.0
+554400051357,440051890114,0.1372,KlaipÓdos r. sav. KalviÖ k. Hugo ¾ojaus g. 23A,995,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,168,1372.2,1372.2,100.0
+554400060448,440039214229,0.177,KlaipÓdos r. sav. KetvergiÖ k. KetvergiÖ g. 32,995,Žemės ūkio teritorijų zona,ZU_F,"0,1;0,8***",0,Z;KT,157,1770.72,1770.72,100.0
+554400110037,554400110037,0.06,KlaipÓdos r. sav. KiÕkÓnÖ k. LibuNiÖ g. 14,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,236,598.87,598.87,100.0
+554500010143,440031007933,0.1,KlaipÓdos r. sav. PlikiÖ mstl. LirginiÖ g. 3,995,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,400,1000.48,1000.48,100.0
+554500010408,440010347123,0.24,KlaipÓdos r. sav. PlikiÖ mstl. Paupio g. 8,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,401,2371.12,2347.61,99.01
+554500010408,440010347123,0.24,KlaipÓdos r. sav. PlikiÖ mstl. Paupio g. 8,995,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,400,2371.12,23.5,0.99
+554500020170,440046351428,1.8733,KlaipÓdos r. sav. KatkÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,05;0,8***",0,Z;KT,398,18732.31,18732.31,100.0
+554500030268,554500030268,0.94,KlaipÓdos r. sav. PlikiÖ mstl.,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,400,10520.24,10520.24,100.0
+554500030356,554500030356,0.93,KlaipÓdos r. sav. PlikiÖ mstl.,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,400,7126.84,6618.57,92.87
+554500030356,554500030356,0.93,KlaipÓdos r. sav. PlikiÖ mstl.,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,404,7126.84,508.27,7.13
+555200050494,440050996997,1.4764,KlaipÓdos r. sav. StragnÖ II k.,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,294,14763.76,14763.76,100.0
+555200090024,555200090024,0.1504,KlaipÓdos r. sav. KuodUiÖ k. LiepÖ g. 2,610,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,294,1503.65,1503.65,100.0
+555800010376,440049320103,0.1491,KlaipÓdos r. sav. AukÕtkiemiÖ k. VÓjÖ g. 16,995,Mažo užstatymo intensyvumo gyvenamoji zona,U_GG_M_F,"0,4*",0,KT,380,1490.9,1417.12,95.05
+555800010376,440049320103,0.1491,KlaipÓdos r. sav. AukÕtkiemiÖ k. VÓjÖ g. 16,995,Miškų ir miškingų teritorijų zona,MI_F,0,0,M;KT,378,1490.9,73.78,4.95
+555800040570,440012055017,0.101,KlaipÓdos r. sav. TruÕeliÖ k. Karpavos g. 2,995,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,379,1009.67,1009.67,100.0
+555800070346,440004787095,0.15,KlaipÓdos r. sav. KlipÕNiÖ k. ¾ileliÖ g. 6,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,1498.6,1498.6,100.0
+555800070382,440005515497,1.2596,KlaipÓdos r. sav. SlengiÖ k.,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,25306.69,19914.44,78.69
+555800070382,440005515497,1.2596,KlaipÓdos r. sav. SlengiÖ k.,995,Pramonės ir sandėliavimo zona,U_PS_F,"2,5",0,KT,365,25306.69,5392.24,21.31
+555800070444,440006816464,0.53,KlaipÓdos r. sav. SlengiÖ k.,610,Pramonės ir sandėliavimo zona,U_PS_F,"2,5",0,KT,365,5299.48,3727.26,70.33
+555800070444,440006816464,0.53,KlaipÓdos r. sav. SlengiÖ k.,610,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,5299.48,1572.22,29.67
+555800070455,440006897976,0.2324,KlaipÓdos r. sav. KlipÕNiÖ k. LazdynÖ g. 2A,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,2324.82,1240.33,53.35
+555800070455,440006897976,0.2324,KlaipÓdos r. sav. KlipÕNiÖ k. LazdynÖ g. 2A,995,Pramonės ir sandėliavimo zona,U_PS_F,"2,5",0,KT,365,2324.82,1084.49,46.65
+555800140004,555800140004,0.3116,KlaipÓdos r. sav. KalotÓs k. Medelyno g. 116,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,374,3116.12,3116.12,100.0
+555800140337,440007239138,0.2463,KlaipÓdos r. sav. KalotÓs k.,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,374,2463.78,2463.78,100.0
+555870010010,440022717642,3.5333,,995,Pramonės ir sandėliavimo zona,U_PS_F,"2,5",0,KT,365,35332.74,35331.97,100.0
+555870010010,440022717642,3.5333,,995,Vidutinio užstatymo intensyvumo gyvenamoji zona,U_GG_V_F,"0,8*",0,KT,381,35332.74,0.77,0.0
+556300060309,440006293068,0.29,KlaipÓdos r. sav. MeiskiÖ k.,610,Žemės ūkio teritorijų zona,ZU_F,"0,1;0,8***",0,Z;KT,81,3129.2,3129.2,100.0
+556500040121,440003728910,0.77,KlaipÓdos r. sav. PleÕkuNiÖ k.,610,Ekstensyvaus užstatymo gyvenamoji zona,U_GG_E_F,"0,2*",0,KT,319,8226.74,8226.74,100.0
+556800050054,556800050054,5.05,KlaipÓdos r. sav. JokuliÖ k.,610,Pramonės ir sandėliavimo zona,U_PS_F,"2,5",0,KT,357,54505.07,54505.07,100.0

@@ -3,7 +3,7 @@ import geopandas as gpd
 # -----------------------------------
 # FAILO KELIAS
 # -----------------------------------
-sklypu_kelias = "01_duomenys/sklypai/klaipedos_raj_ribos_2019.shp"
+sklypu_kelias = "01_duomenys/sklypai/klaipedos_raj_ribos_2019.gpkg"
 
 # -----------------------------------
 # NUSKAITOME SKLYPŲ SLUOKSNĮ

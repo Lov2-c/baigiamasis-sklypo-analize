@@ -14,7 +14,7 @@ from pathlib import Path
 # ---------------------------------------------------------
 
 # Sklypų sluoksnis
-sklypu_failas = r"01_duomenys/sklypai/klaipedos_raj_ribos_2019.shp"
+sklypu_failas = r"01_duomenys/sklypai/klaipedos_raj_ribos_2019.gpkg"
 
 # Miško sklypų sluoksnis
 misko_failas = r"01_duomenys/papildomi/miskai/misko_sklypai.gpkg"

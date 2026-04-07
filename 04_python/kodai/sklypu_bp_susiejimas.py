@@ -4,7 +4,7 @@ import pandas as pd
 # -----------------------------------
 # FAILŲ KELIAI
 # -----------------------------------
-sklypu_kelias = "01_duomenys/sklypai/klaipedos_raj_ribos_2019.shp"
+sklypu_kelias = "01_duomenys/sklypai/klaipedos_raj_ribos_2019.gpkg"
 bp_kelias = "01_duomenys/bp/bp_funkc.shp"
 
 # -----------------------------------

@@ -13,7 +13,7 @@ from pathlib import Path
 # 1. Failų keliai
 # ---------------------------------------------------------
 
-sklypu_failas = r"01_duomenys/sklypai/klaipedos_raj_ribos_2019.shp"
+sklypu_failas = r"01_duomenys/sklypai/klaipedos_raj_ribos_2019.gpkg"
 gelezinkelio_failas = r"01_duomenys/papildomi/grpk/gelezink_tpdr_buffer_45m.gpkg"
 isvedimo_failas = r"06_rezultatai/gelezinkelio_ribojimo_zonos_proc.csv"
 
