@@ -112,10 +112,19 @@ class SklypoAnalize(Base):
     # - preliminariai_negalima
     automatines_analizes_rezultatas = Column(String(50), nullable=True)
 
+    # Senasis laukas paliekamas suderinamumui
+    ukininko_sodybos_isvestis = Column(String(50), nullable=True)
+
+    # Naujas aiškesnis statusas
     # Galimos reikšmės:
     # - netaikoma
-    # - reikia_tikrinti_tpd
-    ukininko_sodybos_isvestis = Column(String(50), nullable=True)
+    # - preliminariai_galima
+    # - galima_su_papildomomis_salygomis
+    # - preliminariai_negalima
+    ukininko_sodybos_statusas = Column(String(50), nullable=True)
+
+    # Automatiškai sugeneruotas sąlygų tekstas
+    ukininko_sodybos_salygos = Column(Text, nullable=True)
 
     # Paaiškinimas, kodėl priskirtas toks rezultatas
     automatines_analizes_paaiskinimas = Column(Text, nullable=True)
