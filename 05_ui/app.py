@@ -4,6 +4,7 @@ from pathlib import Path
 import json
 import re
 import sqlite3
+import sys
 import tempfile
 import zipfile
 
@@ -22,6 +23,12 @@ from streamlit_folium import st_folium
 # ============================================================
 
 PROJEKTO_KATALOGAS = Path(__file__).resolve().parents[1]
+KODU_KATALOGAS = PROJEKTO_KATALOGAS / "04_python" / "kodai"
+
+if str(KODU_KATALOGAS) not in sys.path:
+    sys.path.insert(0, str(KODU_KATALOGAS))
+
+from analizes_servisas import analizuoti_sklypa_pagal_geometrija, NUMATYTAS_BP_KELIAS
 
 DB_FAILO_KELIAS = PROJEKTO_KATALOGAS / "03_db" / "baigiamasis.db"
 PAGRINDINE_LENTELE = "sklypu_analizes"
@@ -256,6 +263,16 @@ def gauti_centra_is_geometrijos(gdf_4326: gpd.GeoDataFrame) -> list[float]:
     return [centroid.y, centroid.x]
 
 
+@st.cache_data(show_spinner=False)
+def ieskoti_db_pagal_sklypo_id(db_kelias: str, sklypo_id: str) -> pd.DataFrame:
+    conn = sqlite3.connect(db_kelias)
+    try:
+        uzklausa = f"SELECT * FROM {PAGRINDINE_LENTELE} WHERE CAST(sklypo_id AS TEXT) = ?"
+        return pd.read_sql_query(uzklausa, conn, params=[str(sklypo_id)])
+    finally:
+        conn.close()
+
+
 def atrinkti_artimus_sklypus(
     gdf_3346: gpd.GeoDataFrame,
     pasirinkto_gdf_3346: gpd.GeoDataFrame,
@@ -287,18 +304,21 @@ def nuskaityti_ikeltas_ribas(uploaded_files):
 
     laikinas_katalogas = Path(tempfile.mkdtemp(prefix="baigiamasis_ikeltos_ribos_"))
 
+    # 1. Išsaugome visus įkeltus failus į laikiną katalogą
     for failas in uploaded_files:
         failo_kelias = laikinas_katalogas / failas.name
         failo_kelias.write_bytes(failas.getbuffer())
 
     visi_failai = [p for p in laikinas_katalogas.rglob("*") if p.is_file()]
 
-    # Jei vienas ZIP, išskleidžiam
+    # 2. Jei įkeltas ZIP, jį išskleidžiame
     if len(visi_failai) == 1 and visi_failai[0].suffix.lower() == ".zip":
         with zipfile.ZipFile(visi_failai[0], "r") as zip_obj:
             zip_obj.extractall(laikinas_katalogas)
+
         visi_failai = [p for p in laikinas_katalogas.rglob("*") if p.is_file()]
 
+    # 3. Ieškome tinkamiausio pagrindinio failo
     prioritetai = [".gpkg", ".geojson", ".json", ".shp", ".dxf"]
     kandidatas = None
 
@@ -311,38 +331,45 @@ def nuskaityti_ikeltas_ribas(uploaded_files):
             break
 
     if kandidatas is None:
-        raise ValueError("Nerastas tinkamas failas. Įkelk GPKG, GeoJSON/JSON, ZIP SHP, SHP rinkinį arba DXF.")
+        raise ValueError(
+            "Nerastas tinkamas failas. Įkelk GPKG, GeoJSON/JSON, ZIP SHP, SHP rinkinį arba DXF."
+        )
 
+    # 4. Nuskaitome failą
     gdf = gpd.read_file(kandidatas)
 
     if gdf.empty:
         raise ValueError("Įkeltame faile nerasta geometrijų.")
 
+    # 5. Jei CRS nenurodytas, laikome kad tai EPSG:3346
     if gdf.crs is None:
         gdf = gdf.set_crs(epsg=3346)
 
+    # 6. Išmetame tuščias / neegzistuojančias geometrijas
     gdf = gdf[gdf.geometry.notna()].copy()
     gdf = gdf[~gdf.geometry.is_empty].copy()
 
     if gdf.empty:
         raise ValueError("Po filtravimo neliko geometrijų.")
 
+    # 7. Viską pervedame į EPSG:3346
     gdf_3346 = gdf.to_crs(epsg=3346)
 
-    # Jei tai poligonai, imame juos
-    jei_poligonai = gdf_3346.geometry.geom_type.isin(["Polygon", "MultiPolygon"]).any()
+    # 8. Jei jau turime poligonus – jungiame juos
+    ar_yra_poligonu = gdf_3346.geometry.geom_type.isin(["Polygon", "MultiPolygon"]).any()
 
-    if jei_poligonai:
+    if ar_yra_poligonu:
         poligonai = gdf_3346[gdf_3346.geometry.geom_type.isin(["Polygon", "MultiPolygon"])].copy()
 
         if poligonai.empty:
             raise ValueError("Nerasta poligoninių geometrijų.")
 
         bendra_geometrija = unary_union(poligonai.geometry.tolist())
+
     else:
-        # Bandome poligonizuoti iš linijų
-        sujungta = unary_union(gdf_3346.geometry.tolist())
-        sugeneruoti_poligonai = list(polygonize(sujungta))
+        # 9. Jei tai linijos (pvz. DXF), bandome iš jų sudaryti poligoną
+        sujungta_geometrija = unary_union(gdf_3346.geometry.tolist())
+        sugeneruoti_poligonai = list(polygonize(sujungta_geometrija))
 
         if not sugeneruoti_poligonai:
             raise ValueError(
@@ -351,11 +378,13 @@ def nuskaityti_ikeltas_ribas(uploaded_files):
 
         bendra_geometrija = unary_union(sugeneruoti_poligonai)
 
+    # 10. Sukuriame vieną galutinį GeoDataFrame
     vienas_gdf_3346 = gpd.GeoDataFrame(
         {"saltinis": ["ikeltas_failas"]},
         geometry=[bendra_geometrija],
         crs="EPSG:3346",
     )
+
     vienas_gdf_4326 = vienas_gdf_3346.to_crs(epsg=4326)
 
     info = {
@@ -398,7 +427,7 @@ def sukurti_zemelapi(
         folium.GeoJson(
             artimu_sklypu_geojson,
             name="Aplinkiniai sklypai",
-            style_function=lambda _:{
+            style_function=lambda _: {
                 "color": "#666666",
                 "weight": 1,
                 "fillColor": "#999999",
@@ -410,7 +439,7 @@ def sukurti_zemelapi(
         folium.GeoJson(
             pradinis_sklypo_geojson,
             name="Pradinis sklypas",
-            style_function=lambda _:{
+            style_function=lambda _: {
                 "color": "red",
                 "weight": 4,
                 "fillColor": "red",
@@ -422,7 +451,7 @@ def sukurti_zemelapi(
         folium.GeoJson(
             ikeltu_ribu_geojson,
             name="Įkeltos aktualios ribos",
-            style_function=lambda _:{
+            style_function=lambda _: {
                 "color": "green",
                 "weight": 4,
                 "fillColor": "green",
@@ -463,15 +492,45 @@ def parodyti_laukus_is_eilutes(eilute: pd.Series, laukai: list[str]):
             st.markdown(f"**{pavadinimas}:** {reiksme}")
 
 
+def vykdyti_bazine_analize(sklypo_gdf: gpd.GeoDataFrame, saltinis: str):
+    """
+    Paleidžia bazinę analizę per naują analizės servisą.
+
+    saltinis gali būti:
+    - "aktualus_sklypas"
+    - "ikeltos_ribos"
+    """
+    rezultatas = analizuoti_sklypa_pagal_geometrija(
+        sklypo_gdf=sklypo_gdf,
+        bp_kelias=NUMATYTAS_BP_KELIAS,
+    )
+
+    st.session_state["naujos_analizes_rezultatas"] = rezultatas
+    st.session_state["naujos_analizes_saltinis"] = saltinis
+
+    return rezultatas
+
+
+def gauti_analizes_saltinio_pavadinima(saltinis: str | None) -> str:
+    if saltinis == "aktualus_sklypas":
+        return "aktualų rastą sklypą"
+    if saltinis == "ikeltos_ribos":
+        return "įkeltas ribas"
+    return "nenurodytą šaltinį"
+
+
 def isvalyti_rezultatus():
     raktai = [
         "rasto_db_irasa_dict",
         "rasto_atviro_sklypo_info",
         "rasto_atviro_sklypo_atributai",
+        "rasto_sklypo_gdf_3346",
         "pradinio_sklypo_geojson",
         "artimu_sklypu_geojson",
         "zemelapio_centras",
         "db_busena",
+        "naujos_analizes_rezultatas",
+        "naujos_analizes_saltinis",
     ]
     for raktas in raktai:
         if raktas in st.session_state:
@@ -693,15 +752,21 @@ if ieskoti_paspausta:
         st.session_state["rasto_db_irasa_dict"] = None
         st.session_state["rasto_atviro_sklypo_info"] = None
         st.session_state["rasto_atviro_sklypo_atributai"] = None
+        st.session_state["rasto_sklypo_gdf_3346"] = None
         st.session_state["pradinio_sklypo_geojson"] = None
         st.session_state["artimu_sklypu_geojson"] = None
         st.session_state["zemelapio_centras"] = zemelapio_pradinis_centras
         st.session_state["db_busena"] = "aktualiame_sluoksnyje_nerastas"
+        st.session_state["naujos_analizes_rezultatas"] = None
+        st.session_state["naujos_analizes_saltinis"] = None
         st.warning("Sklypas pagal šį unikalų numerį aktualiame sluoksnyje nerastas.")
     else:
         st.session_state["rasto_atviro_sklypo_info"] = atviro_info
         st.session_state["rasto_atviro_sklypo_atributai"] = rastas_3346.iloc[0].drop(labels="geometry").to_dict()
+        st.session_state["rasto_sklypo_gdf_3346"] = rastas_3346.copy()
         st.session_state["pradinio_sklypo_geojson"] = sukurti_geojson_is_gdf(rastas_4326)
+        st.session_state["naujos_analizes_rezultatas"] = None
+        st.session_state["naujos_analizes_saltinis"] = None
         st.session_state["artimu_sklypu_geojson"] = atrinkti_artimus_sklypus(
             gdf_3346=gdf_3346,
             pasirinkto_gdf_3346=rastas_3346,
@@ -823,41 +888,92 @@ if ikeltu_ribu_info:
     st.write(f"**Įkeltų ribų plotas:** {ikeltu_ribu_info['plotas_m2']} m²")
 
 # ============================================================
-# 9. PERSKAIČIAVIMO BLOKAS
+# 9. ANALIZĖS VYKDYMO BLOKAS
 # ============================================================
 
-st.subheader("4. Perskaičiavimas pagal aktualias ribas")
+st.subheader("4. Analizės vykdymas")
 
-if not rasto_atviro_sklypo_info:
+rasto_sklypo_gdf_3346 = st.session_state.get("rasto_sklypo_gdf_3346")
+naujos_analizes_rezultatas = st.session_state.get("naujos_analizes_rezultatas")
+naujos_analizes_saltinis = st.session_state.get("naujos_analizes_saltinis")
+
+if not rasto_atviro_sklypo_info or rasto_sklypo_gdf_3346 is None:
     st.info("Pirmiausia rask aktualų sklypą pagal unikalų numerį.")
-elif ikeltos_ribos_3346 is None:
-    st.info("Įkelk aktualias ribas, kad būtų galima paruošti perskaičiavimą.")
 else:
-    pradinis_plotas_m2 = None
+    col1, col2 = st.columns(2)
 
-    if rasto_atviro_sklypo_atributai and rasto_atviro_sklypo_atributai.get("skl_plotas") is not None:
-        try:
-            pradinis_plotas_m2 = float(rasto_atviro_sklypo_atributai["skl_plotas"]) * 10000
-        except Exception:
-            pradinis_plotas_m2 = None
+    with col1:
+        sukurti_analize_paspausta = st.button(
+            "Sukurti analizę šiam sklypui",
+            use_container_width=True,
+        )
 
-    perskaiciuoti_paspausta = st.button("Perskaičiuoti pagal įkeltas ribas", use_container_width=True)
+    with col2:
+        perskaiciuoti_paspausta = st.button(
+            "Perskaičiuoti pagal įkeltas ribas",
+            use_container_width=True,
+            disabled=ikeltos_ribos_3346 is None,
+        )
+
+    if sukurti_analize_paspausta:
+        with st.spinner("Vykdoma bazinė analizė pagal rasto sklypo geometriją..."):
+            rezultatas = vykdyti_bazine_analize(
+                sklypo_gdf=rasto_sklypo_gdf_3346,
+                saltinis="aktualus_sklypas",
+            )
+
+        naujos_analizes_rezultatas = rezultatas
+        naujos_analizes_saltinis = "aktualus_sklypas"
 
     if perskaiciuoti_paspausta:
-        naujas_plotas_m2 = gauti_plota_m2(ikeltos_ribos_3346)
+        with st.spinner("Vykdoma bazinė analizė pagal įkeltas ribas..."):
+            rezultatas = vykdyti_bazine_analize(
+                sklypo_gdf=ikeltos_ribos_3346,
+                saltinis="ikeltos_ribos",
+            )
 
-        st.success("Įkeltos ribos priimtos perskaičiavimui.")
-        st.write(f"**Naujų ribų plotas:** {round(naujas_plotas_m2, 2)} m²")
+        naujos_analizes_rezultatas = rezultatas
+        naujos_analizes_saltinis = "ikeltos_ribos"
 
-        if pradinis_plotas_m2 is not None:
-            skirtumas = naujas_plotas_m2 - pradinis_plotas_m2
-            st.write(f"**Ankstesnis plotas:** {round(pradinis_plotas_m2, 2)} m²")
-            st.write(f"**Ploto skirtumas:** {round(skirtumas, 2)} m²")
+    if ikeltos_ribos_3346 is None:
+        st.caption("Norint perskaičiuoti pagal naujas ribas, pirmiausia reikia įkelti ribų failą.")
 
-        st.info(
-            "Šiame etape jau veikia realus ribų įkėlimas, nuskaitymas ir ploto palyginimas. "
-            "Kitas žingsnis – prijungti tikrą GIS perskaičiavimą prie tavo esamos analizės funkcijos."
-        )
+if not naujos_analizes_rezultatas:
+    st.info("Dar nepaleista nauja analizė per analizės servisą.")
+else:
+    sekme = naujos_analizes_rezultatas.get("sekme", False)
+    zinute = naujos_analizes_rezultatas.get("zinute", "")
+    rezultato_df = naujos_analizes_rezultatas.get("rezultato_df")
+    rezultato_dict = naujos_analizes_rezultatas.get("rezultato_dict")
+    laikinas_failas = naujos_analizes_rezultatas.get("laikinas_sklypo_failas")
+
+    st.markdown("### Naujos bazinės analizės rezultatas")
+    st.write(f"**Analizės šaltinis:** {gauti_analizes_saltinio_pavadinima(naujos_analizes_saltinis)}")
+
+    if sekme:
+        st.success(zinute)
+
+        if rezultato_dict:
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.markdown(f"**Pagrindinė BP zona:** {rodyti_reiksme(rezultato_dict.get('pagrindine_zona_pavadinimas'))}")
+                st.markdown(f"**Zonos kodas:** {rodyti_reiksme(rezultato_dict.get('pagrindine_zona_kodas'))}")
+                st.markdown(f"**Užstatymo intensyvumas:** {rodyti_reiksme(rezultato_dict.get('pagrindine_u_intens'))}")
+
+            with col2:
+                st.markdown(f"**Maks. aukštų sk.:** {rodyti_reiksme(rezultato_dict.get('pagrindine_max_auk_sk'))}")
+                st.markdown(f"**Pagrindinė paskirtis:** {rodyti_reiksme(rezultato_dict.get('pagrindine_pagr_pask'))}")
+                st.markdown(f"**Automatinės analizės rezultatas:** {rodyti_reiksme(rezultato_dict.get('automatines_analizes_rezultatas'))}")
+
+        if rezultato_df is not None:
+            st.markdown("#### Pilna serviso grąžinta eilutė")
+            st.dataframe(rezultato_df, use_container_width=True)
+
+        if laikinas_failas:
+            st.caption(f"Laikinas analizės failas: {laikinas_failas}")
+    else:
+        st.error(zinute)
 
 # ============================================================
 # 10. DB ANALIZĖ
