@@ -131,7 +131,188 @@ LAUKU_PAVADINIMAI = {
     "gelezinkelio_ribojimo_zonos_proc": "Geležinkelio ribojimo zonos plotas, %",
 }
 
-
+AUTOMATINES_VIZUALIZACIJOS_SLUOKSNIAI = [
+    {
+        "kodas": "draustiniai",
+        "pavadinimas": "Draustiniai",
+        "grupe": "Saugomos teritorijos",
+        "spalva": "#d73027",
+        "aprasymas_zmogui": "Sklypas patenka į draustinio teritoriją arba ją kerta. Tokiose vietose gali būti taikomi papildomi veiklos ir statybos ribojimai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "draustiniai_tpdr.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "saugomos_teritorijos" / "draustiniai.gpkg",
+        ],
+    },
+    {
+        "kodas": "rezervatai",
+        "pavadinimas": "Rezervatai",
+        "grupe": "Saugomos teritorijos",
+        "spalva": "#a50026",
+        "aprasymas_zmogui": "Sklypas patenka į rezervato teritoriją arba ją kerta. Tai jautrios teritorijos, kuriose veikla dažnai ribojama griežčiau.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "rezervatai_tpdr.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "saugomos_teritorijos" / "rezervatai.gpkg",
+        ],
+    },
+    {
+        "kodas": "parkai",
+        "pavadinimas": "Parkai",
+        "grupe": "Saugomos teritorijos",
+        "spalva": "#f46d43",
+        "aprasymas_zmogui": "Sklypas patenka į saugomos teritorijos ribas. Tokiu atveju gali būti taikomi papildomi kraštovaizdžio ir veiklos reikalavimai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "parkai_tpdr.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "saugomos_teritorijos" / "parkai.gpkg",
+        ],
+    },
+    {
+        "kodas": "biosferos_poligonai",
+        "pavadinimas": "Biosferos teritorijos",
+        "grupe": "Saugomos teritorijos",
+        "spalva": "#fdae61",
+        "aprasymas_zmogui": "Sklypas patenka į biosferos teritoriją. Tokiose vietose gali būti taikomos papildomos aplinkos apsaugos sąlygos.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "biosferos_poligonai_tpdr.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "saugomos_teritorijos" / "biosferos_poligonai.gpkg",
+        ],
+    },
+    {
+        "kodas": "bast",
+        "pavadinimas": "BAST teritorijos",
+        "grupe": "Saugomos teritorijos",
+        "spalva": "#fee08b",
+        "aprasymas_zmogui": "Sklypas patenka į Europos mastu saugomą gamtinę teritoriją. Tokiose vietose gali būti papildomų apribojimų ar derinimų poreikis.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "bast_tpdr.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "saugomos_teritorijos" / "bast.gpkg",
+        ],
+    },
+    {
+        "kodas": "past",
+        "pavadinimas": "PAST teritorijos",
+        "grupe": "Saugomos teritorijos",
+        "spalva": "#ffffbf",
+        "aprasymas_zmogui": "Sklypas patenka į paukščių apsaugai svarbią teritoriją. Tai gali reikšti papildomą aplinkosauginį vertinimą ar ribojimus.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "past_tpdr.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "saugomos_teritorijos" / "past.gpkg",
+        ],
+    },
+    {
+        "kodas": "pajurio_juosta",
+        "pavadinimas": "Pajūrio juosta",
+        "grupe": "Saugomos teritorijos",
+        "spalva": "#66bd63",
+        "aprasymas_zmogui": "Sklypas patenka į pajūrio juostą. Tokiose teritorijose dažnai taikomi papildomi veiklos ir statybos ribojimai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "pajurio_juosta_tpdr.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "saugomos_teritorijos" / "pajurio_juosta.gpkg",
+        ],
+    },
+    {
+        "kodas": "buferines_apsaugos_zonos",
+        "pavadinimas": "Buferinės apsaugos zonos",
+        "grupe": "Saugomos teritorijos",
+        "spalva": "#1a9850",
+        "aprasymas_zmogui": "Sklypas patenka į apsauginį buferį. Tokiose vietose gali būti taikomi papildomi naudojimo ar statybos apribojimai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "buferines_apsaugos_zonos_sutvarkytos.gpkg",
+            PROJEKTO_KATALOGAS / "02_projektas" / "papildomi" / "buferines_apsaugos_zonos_tpdr.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "saugomos_teritorijos" / "buferines_apsaugos_zonos.gpkg",
+        ],
+    },
+    {
+        "kodas": "miskas",
+        "pavadinimas": "Miško teritorijos",
+        "grupe": "Gamtiniai ribojimai",
+        "spalva": "#2c7bb6",
+        "aprasymas_zmogui": "Dalis sklypo patenka į miško teritoriją. Tokiose vietose statybos galimybės dažnai vertinamos papildomai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "miskai" / "misko_sklypai.gpkg",
+        ],
+    },
+    {
+        "kodas": "kvr_poligonai",
+        "pavadinimas": "Kultūros paveldo objektai",
+        "grupe": "Kultūros paveldas",
+        "spalva": "#5e4fa2",
+        "aprasymas_zmogui": "Sklypas patenka į kultūros paveldo objekto teritoriją. Tokiu atveju gali būti reikalingi papildomi derinimai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "kulturos_paveldas" / "kvr_poligonai.gpkg",
+        ],
+    },
+    {
+        "kodas": "kvr_apsaugos_zonos",
+        "pavadinimas": "Kultūros paveldo apsaugos zonos",
+        "grupe": "Kultūros paveldas",
+        "spalva": "#3288bd",
+        "aprasymas_zmogui": "Sklypas patenka į kultūros paveldo apsaugos zoną. Tokiose vietose dažnai taikomi papildomi projektavimo ir derinimo reikalavimai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "kulturos_paveldas" / "kvr_apsaugos_zonos.gpkg",
+        ],
+    },
+    {
+        "kodas": "pelkes",
+        "pavadinimas": "Pelkės",
+        "grupe": "Gamtiniai ribojimai",
+        "spalva": "#4575b4",
+        "aprasymas_zmogui": "Dalis sklypo patenka į pelkių teritoriją. Tokiose vietose dažnai reikalingas atsargesnis vertinimas.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "szns" / "pelkes_tpdr.gpkg",
+        ],
+    },
+    {
+        "kodas": "saltinynai",
+        "pavadinimas": "Šaltinynai",
+        "grupe": "Gamtiniai ribojimai",
+        "spalva": "#74add1",
+        "aprasymas_zmogui": "Sklypas patenka į šaltinynų teritoriją. Tokios vietos laikomos jautriomis ir gali reikalauti papildomo vertinimo.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "szns" / "saltinynai_tpdr.gpkg",
+        ],
+    },
+    {
+        "kodas": "pievos_ganyklos",
+        "pavadinimas": "Natūralios pievos ir ganyklos",
+        "grupe": "Gamtiniai ribojimai",
+        "spalva": "#abd9e9",
+        "aprasymas_zmogui": "Dalis sklypo patenka į vertingų pievų ar ganyklų teritoriją. Tokiose vietose gali būti taikomi papildomi apribojimai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "szns" / "pievos_ganyklos_tpdr.gpkg",
+        ],
+    },
+    {
+        "kodas": "drenazo_plotai",
+        "pavadinimas": "Drenažo plotai",
+        "grupe": "Inžineriniai ribojimai",
+        "spalva": "#fdae61",
+        "aprasymas_zmogui": "Sklype yra melioracijos infrastruktūros ar su ja susijusių plotų. Tai gali turėti reikšmės projektavimui ir darbų organizavimui.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "melioracija" / "dren_p.gpkg",
+        ],
+    },
+    {
+        "kodas": "rinktuvu_apsaugos_zonos",
+        "pavadinimas": "Rinktuvų apsaugos zonos",
+        "grupe": "Inžineriniai ribojimai",
+        "spalva": "#f46d43",
+        "aprasymas_zmogui": "Sklype yra melioracijos rinktuvų apsaugos zona. Tokiose vietose gali būti papildomų ribojimų kasimo ar statybos darbams.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "melioracija" / "rinkt_l_buffer_15m.gpkg",
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "melioracija" / "rinkt_l_125plus_buffer_15m.gpkg",
+        ],
+    },
+    {
+        "kodas": "gelezinkelio_ribojimo_zonos",
+        "pavadinimas": "Geležinkelio ribojimo zona",
+        "grupe": "Inžineriniai ribojimai",
+        "spalva": "#d73027",
+        "aprasymas_zmogui": "Sklypas patenka į teritoriją prie geležinkelio, kur gali būti taikomi papildomi atstumų ir veiklos ribojimai.",
+        "galimi_keliai": [
+            PROJEKTO_KATALOGAS / "01_duomenys" / "papildomi" / "grpk" / "gelezink_tpdr_buffer_45m.gpkg",
+        ],
+    },
+]
 # ============================================================
 # 2. PAGALBINĖS FUNKCIJOS
 # ============================================================
@@ -536,6 +717,233 @@ def isvalyti_rezultatus():
         if raktas in st.session_state:
             del st.session_state[raktas]
 
+def gauti_pirma_esanti_kelia(galimi_keliai: list[Path]) -> Path | None:
+    for kelias in galimi_keliai:
+        if kelias.exists():
+            return kelias
+    return None
+
+
+@st.cache_resource(show_spinner=False)
+def uzkrauti_automatines_vizualizacijos_sluoksni(sluoksnio_kelias: str) -> gpd.GeoDataFrame:
+    gdf = gpd.read_file(sluoksnio_kelias)
+
+    if gdf.empty:
+        return gpd.GeoDataFrame(geometry=[], crs="EPSG:3346")
+
+    if gdf.crs is None:
+        gdf = gdf.set_crs(epsg=3346)
+
+    gdf = gdf[gdf.geometry.notna()].copy()
+    gdf = gdf[~gdf.geometry.is_empty].copy()
+
+    if gdf.empty:
+        return gpd.GeoDataFrame(geometry=[], crs="EPSG:3346")
+
+    gdf_3346 = gdf.to_crs(epsg=3346).copy()
+
+    try:
+        gdf_3346.geometry = gdf_3346.geometry.buffer(0)
+    except Exception:
+        pass
+
+    gdf_3346 = gdf_3346[gdf_3346.geometry.notna()].copy()
+    gdf_3346 = gdf_3346[~gdf_3346.geometry.is_empty].copy()
+
+    return gdf_3346
+
+
+def apskaiciuoti_sluoksnio_sankirta(sklypo_gdf_3346: gpd.GeoDataFrame, sluoksnio_gdf_3346: gpd.GeoDataFrame):
+    if sklypo_gdf_3346 is None or sklypo_gdf_3346.empty:
+        return None
+
+    if sluoksnio_gdf_3346 is None or sluoksnio_gdf_3346.empty:
+        return None
+
+    sklypas = sklypo_gdf_3346.copy()
+    sklypas = sklypas[sklypas.geometry.notna()].copy()
+    sklypas = sklypas[~sklypas.geometry.is_empty].copy()
+
+    if sklypas.empty:
+        return None
+
+    try:
+        sklypas.geometry = sklypas.geometry.buffer(0)
+    except Exception:
+        pass
+
+    sklypo_geometrija = sklypas.geometry.iloc[0]
+
+    kandidatai = sluoksnio_gdf_3346[sluoksnio_gdf_3346.geometry.intersects(sklypo_geometrija)].copy()
+
+    if kandidatai.empty:
+        return None
+
+    try:
+        kandidatai.geometry = kandidatai.geometry.buffer(0)
+    except Exception:
+        pass
+
+    try:
+        sankirta = gpd.overlay(
+            sklypas[["geometry"]],
+            kandidatai[["geometry"]],
+            how="intersection",
+        )
+    except Exception:
+        return None
+
+    if sankirta.empty:
+        return None
+
+    sankirta = sankirta[sankirta.geometry.notna()].copy()
+    sankirta = sankirta[~sankirta.geometry.is_empty].copy()
+
+    if sankirta.empty:
+        return None
+
+    sankirtos_plotas_m2 = float(sankirta.geometry.area.sum())
+    sklypo_plotas_m2 = float(sklypas.geometry.area.sum())
+
+    if sklypo_plotas_m2 <= 0 or sankirtos_plotas_m2 <= 0:
+        return None
+
+    procentas = round((sankirtos_plotas_m2 / sklypo_plotas_m2) * 100, 2)
+
+    return {
+        "sankirta_3346": sankirta,
+        "plotas_m2": round(sankirtos_plotas_m2, 2),
+        "procentas": procentas,
+    }
+
+
+def parengti_automatines_vizualizacijos_duomenis(sklypo_gdf_3346: gpd.GeoDataFrame):
+    rezultatai = []
+    nerasti_failai = []
+
+    for sluoksnis in AUTOMATINES_VIZUALIZACIJOS_SLUOKSNIAI:
+        rastas_kelias = gauti_pirma_esanti_kelia(sluoksnis["galimi_keliai"])
+
+        if rastas_kelias is None:
+            nerasti_failai.append(sluoksnis["pavadinimas"])
+            continue
+
+        try:
+            sluoksnio_gdf_3346 = uzkrauti_automatines_vizualizacijos_sluoksni(str(rastas_kelias))
+            sankirta_info = apskaiciuoti_sluoksnio_sankirta(
+                sklypo_gdf_3346=sklypo_gdf_3346,
+                sluoksnio_gdf_3346=sluoksnio_gdf_3346,
+            )
+
+            if not sankirta_info:
+                continue
+
+            sankirta_4326 = sankirta_info["sankirta_3346"].to_crs(epsg=4326)
+
+            rezultatai.append(
+                {
+                    "kodas": sluoksnis["kodas"],
+                    "pavadinimas": sluoksnis["pavadinimas"],
+                    "grupe": sluoksnis["grupe"],
+                    "spalva": sluoksnis["spalva"],
+                    "aprasymas_zmogui": sluoksnis["aprasymas_zmogui"],
+                    "sluoksnio_kelias": str(rastas_kelias),
+                    "plotas_m2": sankirta_info["plotas_m2"],
+                    "procentas": sankirta_info["procentas"],
+                    "geojson": sukurti_geojson_is_gdf(sankirta_4326),
+                }
+            )
+        except Exception:
+            continue
+
+    rezultatai = sorted(
+        rezultatai,
+        key=lambda x: (-x["procentas"], x["pavadinimas"]),
+    )
+
+    return rezultatai, nerasti_failai
+
+
+def sukurti_automatines_analizes_zemelapi(
+    centras: list[float],
+    sklypo_geojson: dict,
+    automatiniai_sluoksniai: list[dict],
+):
+    zemelapis = folium.Map(
+        location=centras,
+        zoom_start=PRADINIS_ZOOM,
+        control_scale=True,
+        tiles="OpenStreetMap",
+    )
+
+    folium.raster_layers.WmsTileLayer(
+        url=RC_WMS_URL,
+        name="RC kadastro žemėlapis",
+        layers=RC_WMS_LAYERS,
+        fmt="image/png",
+        transparent=True,
+        version="1.1.1",
+        attr="Geoportal / Registrų centras",
+        overlay=True,
+        control=True,
+        show=True,
+    ).add_to(zemelapis)
+
+    for sluoksnis in automatiniai_sluoksniai:
+        folium.GeoJson(
+            sluoksnis["geojson"],
+            name=sluoksnis["pavadinimas"],
+            style_function=lambda _, spalva=sluoksnis["spalva"]: {
+                "color": spalva,
+                "weight": 2,
+                "fillColor": spalva,
+                "fillOpacity": 0.35,
+            },
+        ).add_to(zemelapis)
+
+    folium.GeoJson(
+        sklypo_geojson,
+        name="Analizuojamas sklypas",
+        style_function=lambda _: {
+            "color": "#cc0000",
+            "weight": 4,
+            "fillColor": "#cc0000",
+            "fillOpacity": 0.08,
+        },
+    ).add_to(zemelapis)
+
+    MousePosition(
+        position="topright",
+        separator=" | ",
+        prefix="Koordinatės",
+    ).add_to(zemelapis)
+
+    folium.LayerControl().add_to(zemelapis)
+    return zemelapis
+
+
+def parodyti_automatines_vizualizacijos_legenda(automatiniai_sluoksniai: list[dict]):
+    if not automatiniai_sluoksniai:
+        return
+
+    st.markdown("#### Legenda")
+
+    for sluoksnis in automatiniai_sluoksniai:
+        st.markdown(
+            f"""
+            <div style="display:flex; align-items:center; margin-bottom:6px;">
+                <div style="
+                    width:18px;
+                    height:18px;
+                    background:{sluoksnis['spalva']};
+                    border:1px solid #333;
+                    margin-right:8px;
+                "></div>
+                <div><strong>{sluoksnis['pavadinimas']}</strong></div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 # ============================================================
 # 3. DUOMENŲ UŽKROVIMAS
@@ -974,12 +1382,99 @@ else:
             st.caption(f"Laikinas analizės failas: {laikinas_failas}")
     else:
         st.error(zinute)
-
 # ============================================================
-# 10. DB ANALIZĖ
+# 10. AUTOMATINĖS ANALIZĖS VIZUALINIS BLOKAS
 # ============================================================
 
-st.subheader("5. Vidinės DB atitikmuo ir preliminari analizė")
+st.subheader("5. Automatinės analizės vaizdas žemėlapyje")
+
+if not naujos_analizes_rezultatas:
+    st.info("Pirmiausia paleisk automatinę analizę.")
+else:
+    sekme = naujos_analizes_rezultatas.get("sekme", False)
+
+    if not sekme:
+        st.info("Automatinės analizės vaizdas bus rodomas tik tada, kai analizė sėkmingai įvykdyta.")
+    else:
+        if naujos_analizes_saltinis == "ikeltos_ribos" and ikeltos_ribos_3346 is not None:
+            vizualizacijos_sklypas_3346 = ikeltos_ribos_3346
+        else:
+            vizualizacijos_sklypas_3346 = rasto_sklypo_gdf_3346
+
+        if vizualizacijos_sklypas_3346 is None or vizualizacijos_sklypas_3346.empty:
+            st.warning("Nėra geometrijos automatinei vizualizacijai.")
+        else:
+            with st.spinner("Ruošiamas automatinės analizės vaizdas..."):
+                automatiniai_sluoksniai, nerasti_automatiniai_failai = parengti_automatines_vizualizacijos_duomenis(
+                    vizualizacijos_sklypas_3346
+                )
+
+            vizualizacijos_sklypas_4326 = vizualizacijos_sklypas_3346.to_crs(epsg=4326)
+            vizualizacijos_sklypo_geojson = sukurti_geojson_is_gdf(vizualizacijos_sklypas_4326)
+            vizualizacijos_centras = gauti_centra_is_geometrijos(vizualizacijos_sklypas_4326)
+
+            if not automatiniai_sluoksniai:
+                st.info("Šiam sklypui iš automatinei analizei naudojamų vietinių sluoksnių sankirtų nerasta.")
+            else:
+                zemelapis_auto = sukurti_automatines_analizes_zemelapi(
+                    centras=vizualizacijos_centras,
+                    sklypo_geojson=vizualizacijos_sklypo_geojson,
+                    automatiniai_sluoksniai=automatiniai_sluoksniai,
+                )
+
+                st_folium(
+                    zemelapis_auto,
+                    height=ZEMELAPIO_AUKSTIS,
+                    width=ZEMELAPIO_PLOTIS,
+                    returned_objects=[],
+                    key="automatines_analizes_zemelapis",
+                )
+
+                st.caption(
+                    "Žemėlapyje rodomas analizuojamas sklypas ir tie automatinės analizės sluoksniai, "
+                    "kurie realiai kertasi su sklypu."
+                )
+
+                col1, col2 = st.columns([1, 2])
+
+                with col1:
+                    parodyti_automatines_vizualizacijos_legenda(automatiniai_sluoksniai)
+
+                with col2:
+                    st.markdown("#### Aptikti sluoksniai")
+                    santraukos_df = pd.DataFrame(
+                        [
+                            {
+                                "Sluoksnis": s["pavadinimas"],
+                                "Grupė": s["grupe"],
+                                "Plotas sklype, m²": s["plotas_m2"],
+                                "Dalis sklypo, %": s["procentas"],
+                                "Trumpas paaiškinimas": s["aprasymas_zmogui"],
+                            }
+                            for s in automatiniai_sluoksniai
+                        ]
+                    )
+                    st.dataframe(santraukos_df, use_container_width=True)
+
+                with st.expander("Rodyti paaiškinimus paprasta kalba"):
+                    for s in automatiniai_sluoksniai:
+                        st.markdown(f"**{s['pavadinimas']}**")
+                        st.write(s["aprasymas_zmogui"])
+                        st.caption(f"Sankirtos plotas: {s['plotas_m2']} m² | Dalis sklypo: {s['procentas']} %")
+                        st.markdown("---")
+
+            if nerasti_automatiniai_failai:
+                with st.expander("Rodyti nerastus sluoksnių failus"):
+                    st.write(
+                        "Šie sluoksniai buvo aprašyti vizualizacijai, bet jų failų šioje projekto versijoje nepavyko rasti:"
+                    )
+                    st.write(nerasti_automatiniai_failai)
+                
+# ============================================================
+# 11. DB ANALIZĖ
+# ============================================================
+
+st.subheader("6. Vidinės DB atitikmuo ir preliminari analizė")
 
 rasto_db_irasa_dict = st.session_state.get("rasto_db_irasa_dict")
 
@@ -1014,10 +1509,10 @@ else:
         st.write("Reikšmingų ribojimų šiame bloke nerasta arba jie DB dar neužpildyti.")
 
 # ============================================================
-# 11. PAPILDOMA RANKINĖ VALIDACIJA
+# 12. PAPILDOMA RANKINĖ VALIDACIJA
 # ============================================================
 
-st.subheader("6. Papildoma rankinė validacija")
+st.subheader("7. Papildoma rankinė validacija")
 
 if not rasto_atviro_sklypo_info:
     st.info("Pirmiausia rask aktualų sklypą.")
@@ -1083,10 +1578,10 @@ else:
     st.write(f"**Galutinio sprendimo paaiškinimas:** {galutinio_sprendimo_paaiskinimas if galutinio_sprendimo_paaiskinimas.strip() else '—'}")
 
 # ============================================================
-# 12. PDF KRYPTIS
+# 13. PDF KRYPTIS
 # ============================================================
 
-st.subheader("7. Ataskaitos kryptis")
+st.subheader("8. Ataskaitos kryptis")
 
 st.info(
     """
