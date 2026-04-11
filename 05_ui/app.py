@@ -6,6 +6,8 @@ import pandas as pd
 import streamlit as st
 from streamlit_folium import st_folium
 
+from ui_bp_texts import BP_ZONU_TEKSTAI
+
 from ui_config import (
     PROJEKTO_KATALOGAS,
     DB_FAILO_KELIAS,
@@ -26,6 +28,8 @@ from ui_helpers import (
     gauti_plota_m2,
     gauti_centra_is_geometrijos,
     parodyti_laukus_is_eilutes,
+    gauti_lauko_pavadinima,
+    suformuoti_bp_zonos_teksta,
 )
 from ui_data_loaders import (
     nuskaityti_stulpelius_db,
@@ -90,6 +94,8 @@ def isvalyti_rezultatus():
     for raktas in raktai:
         if raktas in st.session_state:
             del st.session_state[raktas]
+
+
 # ============================================================
 # 5. STREAMLIT PUSLAPIS
 # ============================================================
@@ -407,6 +413,17 @@ else:
                 st.markdown(f"**Pagrindinė paskirtis:** {rodyti_reiksme(rezultato_dict.get('pagrindine_pagr_pask'))}")
                 st.markdown(f"**Automatinės analizės rezultatas:** {rodyti_reiksme(rezultato_dict.get('automatines_analizes_rezultatas'))}")
 
+            bp_aprasymo_tekstas = suformuoti_bp_zonos_teksta(
+                zonos_kodas=rezultato_dict.get("pagrindine_zona_kodas"),
+                zonos_pavadinimas=rezultato_dict.get("pagrindine_zona_pavadinimas"),
+                uzstatymo_intensyvumas=rezultato_dict.get("pagrindine_u_intens"),
+                pagrindine_paskirtis=rezultato_dict.get("pagrindine_pagr_pask"),
+                bp_tekstu_zodynas=BP_ZONU_TEKSTAI,
+            )
+
+            st.markdown("#### Bendrojo plano zonos paaiškinimas")
+            st.write(bp_aprasymo_tekstas)
+
         if rezultato_df is not None:
             st.markdown("#### Pilna serviso grąžinta eilutė")
             st.dataframe(rezultato_df, use_container_width=True)
@@ -415,6 +432,7 @@ else:
             st.caption(f"Laikinas analizės failas: {laikinas_failas}")
     else:
         st.error(zinute)
+
 # ============================================================
 # 10. AUTOMATINĖS ANALIZĖS VIZUALINIS BLOKAS
 # ============================================================
@@ -482,17 +500,17 @@ else:
                                 "Grupė": s["grupe"],
                                 "Plotas sklype, m²": s["plotas_m2"],
                                 "Dalis sklypo, %": s["procentas"],
-                                "Trumpas paaiškinimas": s["aprasymas_zmogui"],
+                                "Kas nustatyta": s["trumpas_aprasymas"],
                             }
                             for s in automatiniai_sluoksniai
                         ]
                     )
                     st.dataframe(santraukos_df, use_container_width=True)
 
-                with st.expander("Rodyti paaiškinimus paprasta kalba"):
+                with st.expander("Rodyti parengtus ataskaitos tekstus"):
                     for s in automatiniai_sluoksniai:
                         st.markdown(f"**{s['pavadinimas']}**")
-                        st.write(s["aprasymas_zmogui"])
+                        st.write(s["ataskaitos_tekstas"])
                         st.caption(f"Sankirtos plotas: {s['plotas_m2']} m² | Dalis sklypo: {s['procentas']} %")
                         st.markdown("---")
 
@@ -502,7 +520,7 @@ else:
                         "Šie sluoksniai buvo aprašyti vizualizacijai, bet jų failų šioje projekto versijoje nepavyko rasti:"
                     )
                     st.write(nerasti_automatiniai_failai)
-                
+
 # ============================================================
 # 11. DB ANALIZĖ
 # ============================================================
@@ -532,12 +550,12 @@ else:
     for laukas in RIBOJIMU_LAUKAI:
         if laukas in db_eilute.index and ar_reiksme_reiksminga(db_eilute[laukas]):
             ribojimai_rodymui.append(
-                (gauti_lauko_pavadinima(laukas), rodyti_reiksme(db_eilute[laukas]))
+                (laukas, rodyti_reiksme(db_eilute[laukas]))
             )
 
     if ribojimai_rodymui:
-        for pavadinimas, reiksme in ribojimai_rodymui:
-            st.write(f"- **{pavadinimas}:** {reiksme}")
+        for laukas, reiksme in ribojimai_rodymui:
+            st.write(f"- **{laukas}:** {reiksme}")
     else:
         st.write("Reikšmingų ribojimų šiame bloke nerasta arba jie DB dar neužpildyti.")
 
@@ -628,7 +646,7 @@ st.info(
 )
 
 # ============================================================
-# 13. APAČIOS INFORMACIJA
+# 14. APAČIOS INFORMACIJA
 # ============================================================
 
 st.markdown("---")

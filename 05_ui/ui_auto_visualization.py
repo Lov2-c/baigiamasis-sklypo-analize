@@ -4,7 +4,8 @@ import geopandas as gpd
 import streamlit as st
 
 from ui_config import AUTOMATINES_VIZUALIZACIJOS_SLUOKSNIAI
-from ui_helpers import sukurti_geojson_is_gdf
+from ui_helpers import sukurti_geojson_is_gdf, uzpildyti_ploto_sablona
+from ui_layer_texts import SLUOKSNIU_TEKSTAI
 
 
 def gauti_pirma_esanti_kelia(galimi_keliai: list[Path]) -> Path | None:
@@ -130,13 +131,28 @@ def parengti_automatines_vizualizacijos_duomenis(sklypo_gdf_3346: gpd.GeoDataFra
 
             sankirta_4326 = sankirta_info["sankirta_3346"].to_crs(epsg=4326)
 
+            tekstu_blokas = SLUOKSNIU_TEKSTAI.get(
+                sluoksnis["kodas"],
+                {
+                    "trumpas": sluoksnis["pavadinimas"],
+                    "ataskaitai": "Šiam sluoksniui ataskaitinis tekstas dar neparengtas.",
+                },
+            )
+
+            ataskaitos_tekstas = uzpildyti_ploto_sablona(
+                tekstu_blokas["ataskaitai"],
+                sankirta_info["plotas_m2"],
+                sankirta_info["procentas"],
+            )
+
             rezultatai.append(
                 {
                     "kodas": sluoksnis["kodas"],
                     "pavadinimas": sluoksnis["pavadinimas"],
                     "grupe": sluoksnis["grupe"],
                     "spalva": sluoksnis["spalva"],
-                    "aprasymas_zmogui": sluoksnis["aprasymas_zmogui"],
+                    "trumpas_aprasymas": tekstu_blokas["trumpas"],
+                    "ataskaitos_tekstas": ataskaitos_tekstas,
                     "sluoksnio_kelias": str(rastas_kelias),
                     "plotas_m2": sankirta_info["plotas_m2"],
                     "procentas": sankirta_info["procentas"],

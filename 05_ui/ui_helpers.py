@@ -140,3 +140,53 @@ def parodyti_laukus_is_eilutes(eilute: pd.Series, laukai: list[str]):
     with col2:
         for pavadinimas, reiksme in paruosta[per_puse:]:
             st.markdown(f"**{pavadinimas}:** {reiksme}")
+
+
+def suformuoti_bp_zonos_teksta(
+    zonos_kodas: str | None,
+    zonos_pavadinimas: str | None,
+    uzstatymo_intensyvumas,
+    pagrindine_paskirtis,
+    bp_tekstu_zodynas: dict,
+) -> str:
+    if not zonos_kodas:
+        return "Pagrindinės bendrojo plano zonos nustatyti nepavyko."
+
+    bp_info = bp_tekstu_zodynas.get(zonos_kodas)
+
+    if not bp_info:
+        return f"Sklypas patenka į {zonos_pavadinimas or 'nenustatytą bendrojo plano zoną'}."
+
+    tekstas = bp_info["tekstas"]
+    papildomos_dalys = []
+
+    if bp_info.get("rodyti_intensyvuma") and uzstatymo_intensyvumas not in [None, "", "nan"]:
+        papildomos_dalys.append(f"šiai zonai taikomas užstatymo intensyvumas – {uzstatymo_intensyvumas}")
+
+    if bp_info.get("rodyti_paskirti") and pagrindine_paskirtis not in [None, "", "nan"]:
+        papildomos_dalys.append(f"pagrindinė paskirtis – {pagrindine_paskirtis}")
+
+    if papildomos_dalys:
+        tekstas += " Automatinės analizės duomenimis, " + ", o ".join(papildomos_dalys) + "."
+
+    return tekstas
+
+
+def uzpildyti_ploto_sablona(tekstas: str, plotas_m2, procentas) -> str:
+    if not tekstas:
+        return ""
+
+    if plotas_m2 is None:
+        plotas_tekstas = "—"
+    else:
+        plotas_tekstas = str(plotas_m2).replace(".", ",")
+
+    if procentas is None:
+        procento_tekstas = "—"
+    else:
+        procento_tekstas = str(procentas).replace(".", ",")
+
+    tekstas = tekstas.replace("[X m²]", f"{plotas_tekstas} m²")
+    tekstas = tekstas.replace("[Y %]", f"{procento_tekstas} %")
+
+    return tekstas
