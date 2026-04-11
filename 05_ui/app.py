@@ -18,7 +18,8 @@ from ui_config import (
     ZEMELAPIO_AUKSTIS,
     ARTIMU_SKLYPU_ATSTUMAS_M,
     SVARBIAUSI_DB_LAUKAI,
-    RIBOJIMU_LAUKAI,
+    RIBOJIMU_LAUKAI, 
+    RANKINES_SZNS_SLUOKSNIAI,
 )
 from ui_helpers import (
     rodyti_reiksme,
@@ -44,6 +45,7 @@ from ui_data_loaders import (
 from ui_maps import (
     sukurti_zemelapi,
     sukurti_automatines_analizes_zemelapi,
+    sukurti_rankines_validacijos_zemelapi,
     parodyti_automatines_vizualizacijos_legenda,
 )
 from ui_auto_visualization import (
@@ -565,6 +567,77 @@ else:
 
 st.subheader("7. Papildoma rankinė validacija")
 
+st.markdown("### Rankinės validacijos žemėlapis")
+
+rankines_szns = st.multiselect(
+    "Pasirink SŽNS, kurias matai per peržiūros sluoksnį ir kurios aktualios šiam sklypui",
+    options=list(RANKINES_SZNS_SLUOKSNIAI.keys()),
+)
+
+if not rasto_atviro_sklypo_info or pradinio_sklypo_geojson is None:
+    st.info("Pirmiausia rask aktualų sklypą, kad būtų galima rodyti rankinės validacijos žemėlapį.")
+else:
+    if (
+        naujos_analizes_saltinis == "ikeltos_ribos"
+        and ikeltu_ribu_geojson is not None
+        and ikeltos_ribos_4326 is not None
+    ):
+        rankinio_zemelapio_geojson = ikeltu_ribu_geojson
+        rankinio_zemelapio_centras = gauti_centra_is_geometrijos(ikeltos_ribos_4326)
+    else:
+        rankinio_zemelapio_geojson = pradinio_sklypo_geojson
+        if st.session_state.get("rasto_sklypo_gdf_3346") is not None:
+            rankinio_zemelapio_centras = zemelapio_centras
+        else:
+            rankinio_zemelapio_centras = zemelapio_pradinis_centras
+
+    rankinis_zemelapis = sukurti_rankines_validacijos_zemelapi(
+        centras=rankinio_zemelapio_centras,
+        sklypo_geojson=rankinio_zemelapio_geojson,
+        pasirinktos_rankines_szns=rankines_szns,
+        rankiniu_szns_sluoksniai=RANKINES_SZNS_SLUOKSNIAI,
+    )
+
+    st_folium(
+        rankinis_zemelapis,
+        height=ZEMELAPIO_AUKSTIS,
+        width=ZEMELAPIO_PLOTIS,
+        returned_objects=[],
+        key="rankines_validacijos_zemelapis",
+    )
+
+    st.caption(
+        "Žemėlapyje rodomas sklypas, RC kadastro sluoksnis ir rankiniu būdu pasirinkti SŽNS sluoksniai."
+    )
+
+if rankines_szns:
+    st.markdown("### Pasirinktos rankinės SŽNS")
+    for pavadinimas in rankines_szns:
+        st.write(f"- **{pavadinimas}**")
+
+    st.markdown("### Rankinių SŽNS legenda")
+    for pavadinimas in rankines_szns:
+        info = RANKINES_SZNS_SLUOKSNIAI.get(pavadinimas, {})
+        spalva = info.get("spalva", "#999999")
+
+        st.markdown(
+            f"""
+            <div style="display:flex; align-items:center; margin-bottom:6px;">
+                <div style="
+                    width:18px;
+                    height:18px;
+                    background:{spalva};
+                    border:1px solid #333;
+                    margin-right:8px;
+                "></div>
+                <div><strong>{pavadinimas}</strong></div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+else:
+    st.info("Kol kas rankiniu būdu nepasirinkta nė viena papildoma SŽNS.")
+
 if not rasto_atviro_sklypo_info:
     st.info("Pirmiausia rask aktualų sklypą.")
 else:
@@ -580,7 +653,7 @@ else:
         papildomi_sluoksniai = st.multiselect(
             "Kokie papildomi sluoksniai buvo peržiūrėti?",
             options=[
-                "SŽNS",
+                "SŽNS peržiūros sluoksnis",
                 "Kultūros paveldo objektai",
                 "Drenažas",
                 "Miško plotai",
@@ -610,17 +683,18 @@ else:
 
     rankines_validacijos_pastaba = st.text_area(
         "Rankinės validacijos pastaba",
-        placeholder="Pvz. Įvertinus papildomus sluoksnius nustatyta, kad sklypo dalyje galioja papildomos sąlygos.",
+        placeholder="Pvz. Įvertinus SŽNS peržiūros sluoksnį nustatyta, kad sklypo dalyje galioja papildomos sąlygos.",
         height=120,
     )
 
     galutinio_sprendimo_paaiskinimas = st.text_area(
         "Galutinio sprendimo paaiškinimas",
-        placeholder="Pvz. Statyba galima tik ne SŽNS dalyje, būtina papildoma projektinė analizė.",
+        placeholder="Pvz. Statyba galima tik ne apribotoje sklypo dalyje, būtina papildoma projektinė analizė.",
         height=120,
     )
 
     st.markdown("### Rankinės validacijos santrauka")
+    st.write(f"**Pasirinktos rankinės SŽNS:** {', '.join(rankines_szns) if rankines_szns else '—'}")
     st.write(f"**SŽNS vertinimas:** {szns_rezultatas}")
     st.write(f"**Peržiūrėti papildomi sluoksniai:** {', '.join(papildomi_sluoksniai) if papildomi_sluoksniai else '—'}")
     st.write(f"**Galutinis sprendimas:** {galutinis_sprendimas}")

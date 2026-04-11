@@ -8,7 +8,12 @@ PAGRINDINE_LENTELE = "sklypu_analizes"
 ATVIRU_SKLYPU_ZIP = PROJEKTO_KATALOGAS / "01_duomenys" / "atviri_sklypai" / "klaipedos_rajono_sklypai.zip"
 SUSIEJIMO_CSV = PROJEKTO_KATALOGAS / "06_rezultatai" / "sklypu_susiejimas_2019_su_atvirais_patvirtintas.csv"
 
+RC_KADASTRO_MAPSERVER_URL = "https://www.geoportal.lt/mapproxy/rc_kadastro_zemelapis/MapServer"
+RC_SZNS_MAPSERVER_URL = "https://www.geoportal.lt/mapproxy/rc_szns/MapServer"
+
 RC_WMS_URL = "https://www.geoportal.lt/mapproxy/rc_kadastro_zemelapis/MapServer/WMSServer"
+RC_WMS_LAYERS = "15,21,27,33"
+RC_SZNS_WMS_URL = "https://www.geoportal.lt/mapproxy/rc_szns/MapServer/WMSServer"
 RC_WMS_LAYERS = "15,21,27,33"
 
 PRADINIS_ZEMELAPIO_LAT = 55.71
@@ -284,3 +289,218 @@ AUTOMATINES_VIZUALIZACIJOS_SLUOKSNIAI = [
         ],
     },
 ]
+
+
+RANKINES_SZNS_SLUOKSNIAI = {
+    # Inžineriniai objektai
+    "Ryšių apsaugos zona": {
+        "layer_id": "1",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#8dd3c7",
+    },
+    "Elektros tinklų apsaugos zona": {
+        "layer_id": "2",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#ffd92f",
+    },
+    "Magistralinių dujotiekių apsaugos zona": {
+        "layer_id": "3",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#fb8072",
+    },
+    "Magistralinių dujotiekių vietovių klasių teritorijos": {
+        "layer_id": "4",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#fdb462",
+    },
+    "Naftos įrenginių apsaugos zona": {
+        "layer_id": "5",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#b15928",
+    },
+    "Dujotiekių apsaugos zona": {
+        "layer_id": "6",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#fccde5",
+    },
+    "Suskystintų dujų įrenginių apsaugos zona": {
+        "layer_id": "7",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#d9d9d9",
+    },
+    "Geodezinių ženklų apsaugos zona": {
+        "layer_id": "8",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#bc80bd",
+    },
+    "Meteorologinių aikštelių apsaugos zona": {
+        "layer_id": "10",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#ccebc5",
+    },
+    "Meteorologinių radiolokatorių apsaugos zona": {
+        "layer_id": "11",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#80b1d3",
+    },
+    "Požeminio vandens vandenviečių apsaugos zona": {
+        "layer_id": "12",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#1f78b4",
+    },
+    "Vandens stočių apsaugos zona": {
+        "layer_id": "13",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#33a02c",
+    },
+    "Šilumos perdavimo tinklų apsaugos zona": {
+        "layer_id": "14",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#ff7f00",
+    },
+    "Vandens tiekimo ir nuotėkų apsaugos zona": {
+        "layer_id": "15",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#6a3d9a",
+    },
+    "Molėtų observatorijos apsaugos zona": {
+        "layer_id": "16",
+        "grupe": "Inžineriniai objektai",
+        "spalva": "#b2df8a",
+    },
+
+    # Susisiekimo objektai
+    "Kelių apsaugos zona": {
+        "layer_id": "18",
+        "grupe": "Susisiekimo objektai",
+        "spalva": "#fee08b",
+    },
+    "Klaipėdos uosto apsaugos zona": {
+        "layer_id": "20",
+        "grupe": "Susisiekimo objektai",
+        "spalva": "#f46d43",
+    },
+    "Aerodromų apsaugos zona": {
+        "layer_id": "21",
+        "grupe": "Susisiekimo objektai",
+        "spalva": "#e31a1c",
+    },
+    "Aerodromų triukšmo apsaugos zona": {
+        "layer_id": "22",
+        "grupe": "Susisiekimo objektai",
+        "spalva": "#fb9a99",
+    },
+
+    # Kultūros ir gamtos apsauga
+    "Biosferos rezervatai": {
+        "layer_id": "25",
+        "grupe": "Kultūros ir gamtos apsauga",
+        "spalva": "#fdae61",
+    },
+    "Gamtos paveldo objektų teritorijos": {
+        "layer_id": "27",
+        "grupe": "Kultūros ir gamtos apsauga",
+        "spalva": "#66c2a5",
+    },
+
+    # Sanitariniai objektai
+    "Branduolinių objektų apsaugos zona": {
+        "layer_id": "52",
+        "grupe": "Sanitariniai objektai",
+        "spalva": "#e41a1c",
+    },
+    "Gamybinių objektų sanitarinė apsaugos zona": {
+        "layer_id": "53",
+        "grupe": "Sanitariniai objektai",
+        "spalva": "#ff7f00",
+    },
+    "Pastatuose laikomų gyvulių sanitarinė apsaugos zona": {
+        "layer_id": "54",
+        "grupe": "Sanitariniai objektai",
+        "spalva": "#a65628",
+    },
+    "Komunalinių objektų sanitarinė apsaugos zona": {
+        "layer_id": "55",
+        "grupe": "Sanitariniai objektai",
+        "spalva": "#999999",
+    },
+    "Juodligės židinių apsaugos zona": {
+        "layer_id": "56",
+        "grupe": "Sanitariniai objektai",
+        "spalva": "#984ea3",
+    },
+
+    # Gamtos objektai
+    "Žemės gelmių išteklių telkinių apsaugos zona": {
+        "layer_id": "59",
+        "grupe": "Gamtos objektai",
+        "spalva": "#a6d854",
+    },
+    "Karstinio regiono apsaugos zona": {
+        "layer_id": "60",
+        "grupe": "Gamtos objektai",
+        "spalva": "#ffd92f",
+    },
+    "Vandens telkiniai": {
+        "layer_id": "62",
+        "grupe": "Gamtos objektai",
+        "spalva": "#1f78b4",
+    },
+    "Dirvožemio apsauga": {
+        "layer_id": "65",
+        "grupe": "Gamtos objektai",
+        "spalva": "#b2df8a",
+    },
+    "Akvakultūros tvenkinių apsaugos zona": {
+        "layer_id": "66",
+        "grupe": "Gamtos objektai",
+        "spalva": "#6baed6",
+    },
+    "Paviršinių vandens telkinių apsaugos zona": {
+        "layer_id": "67",
+        "grupe": "Gamtos objektai",
+        "spalva": "#3288bd",
+    },
+    "Paviršinių vandens telkinių pakrantės apsaugos juosta": {
+        "layer_id": "68",
+        "grupe": "Gamtos objektai",
+        "spalva": "#74add1",
+    },
+    "Potvynio grėsmės teritorijos": {
+        "layer_id": "69",
+        "grupe": "Gamtos objektai",
+        "spalva": "#4575b4",
+    },
+
+    # Valstybės apsaugos ir panašios
+    "Valstybės sienos objektų ir įrenginių apsaugos zona": {
+        "layer_id": "71",
+        "grupe": "Valstybės apsaugos objektai",
+        "spalva": "#b3de69",
+    },
+    "Radiolokatorių apsaugos zona": {
+        "layer_id": "72",
+        "grupe": "Valstybės apsaugos objektai",
+        "spalva": "#fccde5",
+    },
+    "Krašto apsaugos objektų apsaugos zona": {
+        "layer_id": "73",
+        "grupe": "Valstybės apsaugos objektai",
+        "spalva": "#bc80bd",
+    },
+    "VSD saugomų objektų apsaugos zona": {
+        "layer_id": "74",
+        "grupe": "Valstybės apsaugos objektai",
+        "spalva": "#8c510a",
+    },
+    "Vadovybės apsaugos tarnybos objektų apsaugos zona": {
+        "layer_id": "75",
+        "grupe": "Valstybės apsaugos objektai",
+        "spalva": "#543005",
+    },
+    "NS teritorijos su statybos apribojimais": {
+        "layer_id": "76",
+        "grupe": "Valstybės apsaugos objektai",
+        "spalva": "#d73027",
+    },
+}
