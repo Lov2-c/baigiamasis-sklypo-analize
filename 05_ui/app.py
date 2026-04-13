@@ -19,7 +19,7 @@ from ui_config import (
     ZEMELAPIO_AUKSTIS,
     ARTIMU_SKLYPU_ATSTUMAS_M,
     SVARBIAUSI_DB_LAUKAI,
-    RIBOJIMU_LAUKAI, 
+    RIBOJIMU_LAUKAI,
     RANKINES_SZNS_SLUOKSNIAI,
 )
 from ui_helpers import (
@@ -36,6 +36,7 @@ from ui_helpers import (
 from ui_data_loaders import (
     nuskaityti_stulpelius_db,
     ieskoti_db_pagal_sklypo_id,
+    ieskoti_db_pagal_unik_id_ar_sklypo_id,
     uzkrauti_atvirus_sklypus,
     uzkrauti_susiejimo_csv,
     ieskoti_aktualiame_sluoksnyje_pagal_unikalu_nr,
@@ -54,11 +55,16 @@ from ui_auto_visualization import (
 )
 
 KODU_KATALOGAS = PROJEKTO_KATALOGAS / "04_python" / "kodai"
+DB_KODU_KATALOGAS = PROJEKTO_KATALOGAS / "03_db"
 
 if str(KODU_KATALOGAS) not in sys.path:
     sys.path.insert(0, str(KODU_KATALOGAS))
 
+if str(DB_KODU_KATALOGAS) not in sys.path:
+    sys.path.insert(0, str(DB_KODU_KATALOGAS))
+
 from analizes_servisas import analizuoti_sklypa_pagal_geometrija, NUMATYTAS_BP_KELIAS
+from irasyti_i_db import issaugoti_ar_atnaujinti_analize_db
 
 
 def vykdyti_bazine_analize(sklypo_gdf: gpd.GeoDataFrame, saltinis: str):
@@ -81,9 +87,89 @@ def gauti_analizes_saltinio_pavadinima(saltinis: str | None) -> str:
     return "nenurodytą šaltinį"
 
 
+def parinkti_db_sklypo_id_isaugojimui(rasto_atviro_sklypo_info: dict | None) -> str | None:
+    """
+    Parenka, kokį sklypo_id naudosime DB išsaugojimui.
+
+    Prioritetas:
+    1. jau rastas susietas db_sklypo_id
+    2. atviro sluoksnio unikalus numeris
+    3. atviro sluoksnio kadastro numeris
+    """
+
+    rasto_db_sklypo_id = st.session_state.get("rasto_db_sklypo_id")
+    if rasto_db_sklypo_id:
+        return str(rasto_db_sklypo_id)
+
+    if rasto_atviro_sklypo_info:
+        if rasto_atviro_sklypo_info.get("atviru_unikalus_nr"):
+            return str(rasto_atviro_sklypo_info["atviru_unikalus_nr"])
+
+        if rasto_atviro_sklypo_info.get("atviru_kadastro_nr"):
+            return str(rasto_atviro_sklypo_info["atviru_kadastro_nr"])
+
+    return None
+
+
+def issaugoti_naujos_analizes_rezultata_i_db(
+    rezultatas: dict,
+    saltinis: str,
+    rasto_atviro_sklypo_info: dict | None,
+    rasto_atviro_sklypo_atributai: dict | None,
+    sklypo_gdf_3346: gpd.GeoDataFrame | None,
+):
+    """
+    Paima naujos analizės rezultatą iš UI ir išsaugo / atnaujina DB.
+    """
+
+    if not rezultatas or not rezultatas.get("sekme") or not rezultatas.get("rezultato_dict"):
+        return {
+            "sekme": False,
+            "zinute": "Analizės rezultato nepavyko išsaugoti, nes negautas rezultato_dict.",
+        }
+
+    db_sklypo_id = parinkti_db_sklypo_id_isaugojimui(rasto_atviro_sklypo_info)
+
+    if not db_sklypo_id:
+        return {
+            "sekme": False,
+            "zinute": "Nepavyko nustatyti sklypo_id išsaugojimui į DB.",
+        }
+
+    sklypo_plotas_m2 = None
+    if sklypo_gdf_3346 is not None and not sklypo_gdf_3346.empty:
+        sklypo_plotas_m2 = gauti_plota_m2(sklypo_gdf_3346)
+
+    issaugojimo_rezultatas = issaugoti_ar_atnaujinti_analize_db(
+        db_kelias=str(DB_FAILO_KELIAS),
+        sklypo_id=db_sklypo_id,
+        rezultato_dict=rezultatas["rezultato_dict"],
+        atviro_sklypo_info=rasto_atviro_sklypo_info,
+        atviro_sklypo_atributai=rasto_atviro_sklypo_atributai,
+        saltinis=saltinis,
+        sklypo_plotas_m2=sklypo_plotas_m2,
+    )
+
+    if issaugojimo_rezultatas.get("sekme"):
+        # Po įrašymo išvalome cache,
+        # kad UI nematytų seno DB rezultato.
+        ieskoti_db_pagal_sklypo_id.clear()
+        ieskoti_db_pagal_unik_id_ar_sklypo_id.clear()
+
+        st.session_state["rasto_db_irasa_dict"] = issaugojimo_rezultatas["irasas_dict"]
+        st.session_state["rasto_db_sklypo_id"] = db_sklypo_id
+        st.session_state["db_busena"] = "analize_rasta"
+        st.session_state["db_isaugojimo_zinute"] = (
+            f"Analizė sėkmingai {issaugojimo_rezultatas['veiksmas']} DB."
+        )
+
+    return issaugojimo_rezultatas
+
+
 def isvalyti_rezultatus():
     raktai = [
         "rasto_db_irasa_dict",
+        "rasto_db_sklypo_id",
         "rasto_atviro_sklypo_info",
         "rasto_atviro_sklypo_atributai",
         "rasto_sklypo_gdf_3346",
@@ -91,6 +177,7 @@ def isvalyti_rezultatus():
         "artimu_sklypu_geojson",
         "zemelapio_centras",
         "db_busena",
+        "db_isaugojimo_zinute",
         "naujos_analizes_rezultatas",
         "naujos_analizes_saltinis",
     ]
@@ -122,6 +209,10 @@ st.markdown(
     4. jei DB įrašo nėra, rodoma aiški būsena: **sklypas rastas, analizė dar nesukurta**.
     """
 )
+
+db_isaugojimo_zinute = st.session_state.pop("db_isaugojimo_zinute", None)
+if db_isaugojimo_zinute:
+    st.success(db_isaugojimo_zinute)
 
 # Patikrinimai
 if not DB_FAILO_KELIAS.exists():
@@ -200,6 +291,7 @@ if ieskoti_paspausta:
 
     if rastas_3346 is None or rastas_4326 is None:
         st.session_state["rasto_db_irasa_dict"] = None
+        st.session_state["rasto_db_sklypo_id"] = None
         st.session_state["rasto_atviro_sklypo_info"] = None
         st.session_state["rasto_atviro_sklypo_atributai"] = None
         st.session_state["rasto_sklypo_gdf_3346"] = None
@@ -231,17 +323,59 @@ if ieskoti_paspausta:
         )
 
         if db_sklypo_id:
+            st.session_state["rasto_db_sklypo_id"] = db_sklypo_id
             db_df = ieskoti_db_pagal_sklypo_id(str(DB_FAILO_KELIAS), db_sklypo_id)
 
             if not db_df.empty:
                 st.session_state["rasto_db_irasa_dict"] = db_df.iloc[0].to_dict()
                 st.session_state["db_busena"] = "analize_rasta"
             else:
-                st.session_state["rasto_db_irasa_dict"] = None
-                st.session_state["db_busena"] = "susiejimas_yra_bet_analizes_nera"
+                # Jei pagal db_sklypo_id neradome, pabandome pagal atviro sluoksnio identifikatorių
+                alternatyvus_identifikatorius = (
+                    atviro_info.get("atviru_unikalus_nr")
+                    or atviro_info.get("atviru_kadastro_nr")
+                )
+
+                if alternatyvus_identifikatorius:
+                    alternatyvus_db_df = ieskoti_db_pagal_unik_id_ar_sklypo_id(
+                        str(DB_FAILO_KELIAS),
+                        str(alternatyvus_identifikatorius),
+                    )
+
+                    if not alternatyvus_db_df.empty:
+                        st.session_state["rasto_db_irasa_dict"] = alternatyvus_db_df.iloc[0].to_dict()
+                        st.session_state["rasto_db_sklypo_id"] = str(alternatyvus_db_df.iloc[0]["sklypo_id"])
+                        st.session_state["db_busena"] = "analize_rasta"
+                    else:
+                        st.session_state["rasto_db_irasa_dict"] = None
+                        st.session_state["db_busena"] = "susiejimas_yra_bet_analizes_nera"
+                else:
+                    st.session_state["rasto_db_irasa_dict"] = None
+                    st.session_state["db_busena"] = "susiejimas_yra_bet_analizes_nera"
         else:
-            st.session_state["rasto_db_irasa_dict"] = None
-            st.session_state["db_busena"] = "analizes_nera"
+            alternatyvus_identifikatorius = (
+                atviro_info.get("atviru_unikalus_nr")
+                or atviro_info.get("atviru_kadastro_nr")
+            )
+
+            if alternatyvus_identifikatorius:
+                alternatyvus_db_df = ieskoti_db_pagal_unik_id_ar_sklypo_id(
+                    str(DB_FAILO_KELIAS),
+                    str(alternatyvus_identifikatorius),
+                )
+
+                if not alternatyvus_db_df.empty:
+                    st.session_state["rasto_db_irasa_dict"] = alternatyvus_db_df.iloc[0].to_dict()
+                    st.session_state["rasto_db_sklypo_id"] = str(alternatyvus_db_df.iloc[0]["sklypo_id"])
+                    st.session_state["db_busena"] = "analize_rasta"
+                else:
+                    st.session_state["rasto_db_irasa_dict"] = None
+                    st.session_state["rasto_db_sklypo_id"] = None
+                    st.session_state["db_busena"] = "analizes_nera"
+            else:
+                st.session_state["rasto_db_irasa_dict"] = None
+                st.session_state["rasto_db_sklypo_id"] = None
+                st.session_state["db_busena"] = "analizes_nera"
 
 # ============================================================
 # 7. RASTO SKLYPO INFORMACIJA
@@ -375,6 +509,20 @@ else:
         naujos_analizes_rezultatas = rezultatas
         naujos_analizes_saltinis = "aktualus_sklypas"
 
+        if rezultatas.get("sekme") and rezultatas.get("rezultato_dict"):
+            issaugojimo_rezultatas = issaugoti_naujos_analizes_rezultata_i_db(
+                rezultatas=rezultatas,
+                saltinis="aktualus_sklypas",
+                rasto_atviro_sklypo_info=rasto_atviro_sklypo_info,
+                rasto_atviro_sklypo_atributai=rasto_atviro_sklypo_atributai,
+                sklypo_gdf_3346=rasto_sklypo_gdf_3346,
+            )
+
+            if issaugojimo_rezultatas.get("sekme"):
+                st.rerun()
+            else:
+                st.error(issaugojimo_rezultatas.get("zinute", "Nepavyko išsaugoti analizės į DB."))
+
     if perskaiciuoti_paspausta:
         with st.spinner("Vykdoma bazinė analizė pagal įkeltas ribas..."):
             rezultatas = vykdyti_bazine_analize(
@@ -384,6 +532,20 @@ else:
 
         naujos_analizes_rezultatas = rezultatas
         naujos_analizes_saltinis = "ikeltos_ribos"
+
+        if rezultatas.get("sekme") and rezultatas.get("rezultato_dict"):
+            issaugojimo_rezultatas = issaugoti_naujos_analizes_rezultata_i_db(
+                rezultatas=rezultatas,
+                saltinis="ikeltos_ribos",
+                rasto_atviro_sklypo_info=rasto_atviro_sklypo_info,
+                rasto_atviro_sklypo_atributai=rasto_atviro_sklypo_atributai,
+                sklypo_gdf_3346=ikeltos_ribos_3346,
+            )
+
+            if issaugojimo_rezultatas.get("sekme"):
+                st.rerun()
+            else:
+                st.error(issaugojimo_rezultatas.get("zinute", "Nepavyko išsaugoti analizės į DB."))
 
     if ikeltos_ribos_3346 is None:
         st.caption("Norint perskaičiuoti pagal naujas ribas, pirmiausia reikia įkelti ribų failą.")
@@ -441,6 +603,8 @@ else:
 # ============================================================
 
 st.subheader("5. Automatinės analizės vaizdas žemėlapyje")
+
+automatiniai_sluoksniai = []
 
 if not naujos_analizes_rezultatas:
     st.info("Pirmiausia paleisk automatinę analizę.")
@@ -716,10 +880,8 @@ else:
 
     # Laikinas ML rezultatas PDF blokui.
     # Čia kol kas gali įrašyti reikšmę ranka arba vėliau prijungti realią MLP prognozę.
-    # Pvz.:
     ml_prognoze = "vystymas_galimas_su_salygomis"
 
-    # Jei turi sugeneruotą BP tekstą
     bp_zonos_tekstas = None
     if rezultato_dict:
         bp_zonos_tekstas = suformuoti_bp_zonos_teksta(

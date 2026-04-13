@@ -36,6 +36,25 @@ def ieskoti_db_pagal_sklypo_id(db_kelias: str, sklypo_id: str) -> pd.DataFrame:
         conn.close()
 
 
+@st.cache_data(show_spinner=False)
+def ieskoti_db_pagal_unik_id_ar_sklypo_id(db_kelias: str, identifikatorius: str) -> pd.DataFrame:
+    conn = sqlite3.connect(db_kelias)
+    try:
+        uzklausa = f"""
+            SELECT *
+            FROM {PAGRINDINE_LENTELE}
+            WHERE CAST(sklypo_id AS TEXT) = ?
+               OR CAST(unik_id AS TEXT) = ?
+        """
+        return pd.read_sql_query(
+            uzklausa,
+            conn,
+            params=[str(identifikatorius), str(identifikatorius)],
+        )
+    finally:
+        conn.close()
+
+
 @st.cache_resource(show_spinner=True)
 def uzkrauti_atvirus_sklypus(zip_kelias: str):
     zip_path = Path(zip_kelias)
