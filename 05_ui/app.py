@@ -7,6 +7,7 @@ import streamlit as st
 from streamlit_folium import st_folium
 
 from ui_bp_texts import BP_ZONU_TEKSTAI
+from ui_pdf_report import generuoti_pdf_ataskaita
 
 from ui_config import (
     PROJEKTO_KATALOGAS,
@@ -703,21 +704,66 @@ else:
     st.write(f"**Galutinio sprendimo paaiškinimas:** {galutinio_sprendimo_paaiskinimas if galutinio_sprendimo_paaiskinimas.strip() else '—'}")
 
 # ============================================================
-# 13. PDF KRYPTIS
+# PDF ATASKAITA
 # ============================================================
 
-st.subheader("8. Ataskaitos kryptis")
+st.subheader("8. PDF ataskaita")
 
-st.info(
-    """
-    Kitas žingsnis:
-    - generuoti PDF ataskaitą;
-    - į ją įdėti sklypo identifikaciją;
-    - automatinę analizę;
-    - rankinės validacijos išvadą;
-    - žemėlapio vaizdą su sklypo ribomis, o vėliau ir SŽNS sluoksniais.
-    """
-)
+if not naujos_analizes_rezultatas:
+    st.info("Pirmiausia paleisk automatinę analizę, kad būtų galima generuoti PDF ataskaitą.")
+else:
+    rezultato_dict = naujos_analizes_rezultatas.get("rezultato_dict")
+
+    # Laikinas ML rezultatas PDF blokui.
+    # Čia kol kas gali įrašyti reikšmę ranka arba vėliau prijungti realią MLP prognozę.
+    # Pvz.:
+    ml_prognoze = "vystymas_galimas_su_salygomis"
+
+    # Jei turi sugeneruotą BP tekstą
+    bp_zonos_tekstas = None
+    if rezultato_dict:
+        bp_zonos_tekstas = suformuoti_bp_zonos_teksta(
+            zonos_kodas=rezultato_dict.get("pagrindine_zona_kodas"),
+            zonos_pavadinimas=rezultato_dict.get("pagrindine_zona_pavadinimas"),
+            uzstatymo_intensyvumas=rezultato_dict.get("pagrindine_u_intens"),
+            pagrindine_paskirtis=rezultato_dict.get("pagrindine_pagr_pask"),
+            bp_tekstu_zodynas=BP_ZONU_TEKSTAI,
+        )
+
+    rankines_validacijos_santrauka = {
+        "szns_rezultatas": szns_rezultatas if "szns_rezultatas" in locals() else None,
+        "galutinis_sprendimas": galutinis_sprendimas if "galutinis_sprendimas" in locals() else None,
+        "papildoma_patikra": "Taip" if ("reikia_papildomos_rankines_patiktros" in locals() and reikia_papildomos_rankines_patiktros) else "Ne",
+        "pastaba": rankines_validacijos_pastaba if "rankines_validacijos_pastaba" in locals() else None,
+        "paaiskinimas": galutinio_sprendimo_paaiskinimas if "galutinio_sprendimo_paaiskinimas" in locals() else None,
+    }
+
+    pdf_sklypo_geojson = None
+    if "vizualizacijos_sklypo_geojson" in locals():
+        pdf_sklypo_geojson = vizualizacijos_sklypo_geojson
+    elif naujos_analizes_saltinis == "ikeltos_ribos" and ikeltu_ribu_geojson is not None:
+        pdf_sklypo_geojson = ikeltu_ribu_geojson
+    else:
+        pdf_sklypo_geojson = pradinio_sklypo_geojson
+
+    pdf_bytes = generuoti_pdf_ataskaita(
+        rasto_atviro_sklypo_info=rasto_atviro_sklypo_info,
+        rasto_atviro_sklypo_atributai=rasto_atviro_sklypo_atributai,
+        rezultato_dict=rezultato_dict,
+        automatiniai_sluoksniai=automatiniai_sluoksniai if "automatiniai_sluoksniai" in locals() else [],
+        ml_prognoze=ml_prognoze,
+        bp_zonos_tekstas=bp_zonos_tekstas,
+        sklypo_geojson=pdf_sklypo_geojson,
+        rankines_validacijos_santrauka=rankines_validacijos_santrauka,
+    )
+
+    st.download_button(
+        label="Atsisiųsti PDF ataskaitą",
+        data=pdf_bytes,
+        file_name="sklypo_ataskaita.pdf",
+        mime="application/pdf",
+        use_container_width=True,
+    )
 
 # ============================================================
 # 14. APAČIOS INFORMACIJA
