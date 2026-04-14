@@ -15,12 +15,12 @@ def paruosti_normalius_sklypus(sklypai_gdf):
     kurie turi pagrindinius duomenis ir nėra tušti objektai.
     """
 
-    # Pasiliekame tik tas eilutes, kur yra svarbiausi laukai
     filtruoti = sklypai_gdf.copy()
 
+    # Pasiliekame tik tas eilutes, kur yra svarbiausi laukai
     filtruoti = filtruoti[
-        filtruoti["SKLYPO_ID"].notna() &
-        filtruoti["UNIKAL_ID"].notna()
+        filtruoti["SKLYPO_ID"].notna()
+        & filtruoti["UNIKAL_ID"].notna()
     ]
 
     # PLOTAS_REG turi būti didesnis už 0
@@ -60,22 +60,24 @@ def apskaiciuoti_sklypo_bp_procentus(sklypo_eilute, bp_gdf):
 
         susikirtimo_procentas = (susikirtimo_plotas / sklypo_plotas) * 100
 
-        rezultatai.append({
-            "SKLYPO_ID": sklypo_eilute["SKLYPO_ID"],
-            "UNIKAL_ID": sklypo_eilute["UNIKAL_ID"],
-            "PLOTAS_REG": sklypo_eilute["PLOTAS_REG"],
-            "ADRESAS": sklypo_eilute["ADRESAS"],
-            "PASK_TIP": sklypo_eilute["PASK_TIP"],
-            "BP_ZONA_PAV": bp_eilute["F_ZON_APR"],
-            "BP_ZONOS_KODAS": bp_eilute["FUNKC_ZON"],
-            "U_INTENS": bp_eilute["U_INTENS"],
-            "MAX_AUK_SK": bp_eilute["MAX_AUK_SK"],
-            "PAGR_PASK": bp_eilute["PAGR_PASK"],
-            "BP_OBJ_NR": bp_eilute["NR"],
-            "SKLYPO_PLOTAS_M2": round(sklypo_plotas, 2),
-            "SUSIKIRTIMO_PLOTAS_M2": round(susikirtimo_plotas, 2),
-            "SUSIKIRTIMO_PROC": round(susikirtimo_procentas, 2)
-        })
+        rezultatai.append(
+            {
+                "SKLYPO_ID": sklypo_eilute["SKLYPO_ID"],
+                "UNIKAL_ID": sklypo_eilute["UNIKAL_ID"],
+                "PLOTAS_REG": sklypo_eilute["PLOTAS_REG"],
+                "ADRESAS": sklypo_eilute["ADRESAS"],
+                "PASK_TIP": sklypo_eilute["PASK_TIP"],
+                "BP_ZONA_PAV": bp_eilute["F_ZON_APR"],
+                "BP_ZONOS_KODAS": bp_eilute["FUNKC_ZON"],
+                "U_INTENS": bp_eilute["U_INTENS"],
+                "MAX_AUK_SK": bp_eilute["MAX_AUK_SK"],
+                "PAGR_PASK": bp_eilute["PAGR_PASK"],
+                "BP_OBJ_NR": bp_eilute["NR"],
+                "SKLYPO_PLOTAS_M2": round(sklypo_plotas, 2),
+                "SUSIKIRTIMO_PLOTAS_M2": round(susikirtimo_plotas, 2),
+                "SUSIKIRTIMO_PROC": round(susikirtimo_procentas, 2),
+            }
+        )
 
     return rezultatai
 
@@ -97,7 +99,7 @@ if __name__ == "__main__":
     print()
 
     # -----------------------------------
-    # 2. IŠSIFILTRUOJAME NORMALIUS SKLYPUS
+    # 2. IŠSIFILTRUOJAME TVARKINGUS SKLYPUS
     # -----------------------------------
     tvarkingi_sklypai = paruosti_normalius_sklypus(sklypai_gdf)
 
@@ -106,10 +108,12 @@ if __name__ == "__main__":
     print()
 
     # -----------------------------------
-    # 3. PASIIMAME TIK PIRMUS 10000 SKLYPŲ
+    # 3. PASIIMAME ATSITIKTINIUS 10000 SKLYPŲ
     # -----------------------------------
-        if len(tvarkingi_sklypai) < 10000:
-        raise ValueError(f"Tvarkingų sklypų per mažai: {len(tvarkingi_sklypai)}. Reikia bent 10000.")
+    if len(tvarkingi_sklypai) < 10000:
+        raise ValueError(
+            f"Tvarkingų sklypų per mažai: {len(tvarkingi_sklypai)}. Reikia bent 10000."
+        )
 
     mini_sklypai = tvarkingi_sklypai.sample(n=10000, random_state=42).copy()
 
@@ -124,7 +128,10 @@ if __name__ == "__main__":
     for indeksas, (_, sklypo_eilute) in enumerate(mini_sklypai.iterrows(), start=1):
         print(f"Apdorojamas sklypas {indeksas} iš {len(mini_sklypai)}...")
 
-        rezultatai_vienam_sklypui = apskaiciuoti_sklypo_bp_procentus(sklypo_eilute, bp_gdf)
+        rezultatai_vienam_sklypui = apskaiciuoti_sklypo_bp_procentus(
+            sklypo_eilute,
+            bp_gdf,
+        )
         visos_eilutes.extend(rezultatai_vienam_sklypui)
 
     # -----------------------------------
@@ -135,7 +142,7 @@ if __name__ == "__main__":
     # Išrikiuojame, kad būtų gražiau
     mini_dataset_df = mini_dataset_df.sort_values(
         by=["SKLYPO_ID", "SUSIKIRTIMO_PROC"],
-        ascending=[True, False]
+        ascending=[True, False],
     )
 
     # -----------------------------------

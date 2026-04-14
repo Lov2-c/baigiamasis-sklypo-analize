@@ -1,0 +1,2 @@
+﻿modelis,accuracy,balanced_accuracy,precision_macro,recall_macro,f1_macro,precision_weighted,recall_weighted,f1_weighted,train_eilutes,test_eilutes
+RandomForest_10000,0.998,0.9896,0.999,0.9896,0.9942,0.998,0.998,0.998,7490,2497

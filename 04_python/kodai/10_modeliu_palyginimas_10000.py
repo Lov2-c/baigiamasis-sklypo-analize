@@ -1,56 +1,66 @@
-# =========================================================
-# FAILAS: 10_modeliu_palyginimas.py
-# PASKIRTIS:
-# Vienoje vietoje palyginti klasikinį modelį
-# (RandomForest) ir geriausią neuroninį modelį (MLP)
-# naudojant jau išsaugotus rezultatų CSV failus.
-# =========================================================
-
 import pandas as pd
 
+# ============================================
+# 1. NUSKAITOME RANDOM FOREST REZULTATUS
+# ============================================
+rf_kelias = "06_rezultatai/random_forest_10000_rezultatai.csv"
+rf_df = pd.read_csv(rf_kelias)
 
-if __name__ == "__main__":
-    rf_failas = "06_rezultatai/random_forest_10000_rezultatai.csv"
-    mlp_failas = "06_rezultatai/mlp_10000_rezultatai.csv"
-    isvedimo_failas = "06_rezultatai/galutinis_modeliu_palyginimas_10000.csv"
+print("RandomForest rezultatų failas nuskaitytas.")
+print(rf_df)
+print()
 
-    # -----------------------------------------------------
-    # 1. Nuskaitome modelių rezultatų failus
-    # -----------------------------------------------------
-    rf_df = pd.read_csv(rf_failas, encoding="utf-8-sig")
-    mlp_df = pd.read_csv(mlp_failas, encoding="utf-8-sig")
+# ============================================
+# 2. NUSKAITOME VISŲ MLP BANDYMŲ LENTELĘ
+# ============================================
+mlp_bandymu_kelias = "06_rezultatai/mlp_10000_bandymu_lentele.csv"
+mlp_bandymu_df = pd.read_csv(mlp_bandymu_kelias)
 
-    print("RandomForest rezultatų failas nuskaitytas.")
-    print(rf_df)
-    print()
+print("MLP bandymų failas nuskaitytas.")
+print("Bandymų skaičius:", len(mlp_bandymu_df))
+print()
 
-    print("MLP rezultatų failas nuskaitytas.")
-    print(mlp_df)
-    print()
+# ============================================
+# 3. PASIIMAME GERIAUSIĄ MLP BANDYMĄ
+# ============================================
+# Geriausią renkamės pagal macro F1, nes tai svarbi metrika kelių klasių uždaviniui
+geriausias_mlp = mlp_bandymu_df.sort_values(
+    by=["f1_macro", "balanced_accuracy", "accuracy"],
+    ascending=False
+).iloc[[0]].copy()
 
-    # -----------------------------------------------------
-    # 2. Sujungiame į vieną lentelę
-    # -----------------------------------------------------
-    palyginimo_df = pd.concat([rf_df, mlp_df], ignore_index=True)
+# Pervadiname modelio pavadinimą, kad būtų aiškiau lentelėje
+geriausias_mlp["modelis"] = "MLP_10000_best"
 
-    # -----------------------------------------------------
-    # 3. Išrikiuojame pagal svarbiausias metrikas
-    # -----------------------------------------------------
-    palyginimo_df = palyginimo_df.sort_values(
-        by=["f1_macro", "balanced_accuracy", "accuracy"],
-        ascending=False
-    ).reset_index(drop=True)
+print("Geriausias MLP bandymas:")
+print(geriausias_mlp)
+print()
 
-    print("=" * 80)
-    print("GALUTINIS MODELIŲ PALYGINIMAS")
-    print("=" * 80)
-    print(palyginimo_df)
-    print()
+# ============================================
+# 4. SUVIENODINAME STULPELIUS
+# ============================================
+# Pasiimame visų stulpelių sąjungą
+visi_stulpeliai = sorted(set(rf_df.columns).union(set(geriausias_mlp.columns)))
 
-    # -----------------------------------------------------
-    # 4. Išsaugome
-    # -----------------------------------------------------
-    palyginimo_df.to_csv(isvedimo_failas, index=False, encoding="utf-8-sig")
+rf_df = rf_df.reindex(columns=visi_stulpeliai)
+geriausias_mlp = geriausias_mlp.reindex(columns=visi_stulpeliai)
 
-    print("Galutinė modelių palyginimo lentelė išsaugota:")
-    print(isvedimo_failas)
+# ============================================
+# 5. SUJUNGIAME Į GALUTINĘ LENTELĘ
+# ============================================
+galutinis_df = pd.concat([rf_df, geriausias_mlp], ignore_index=True)
+
+print("=" * 80)
+print("GALUTINIS MODELIŲ PALYGINIMAS")
+print("=" * 80)
+print(galutinis_df)
+print()
+
+# ============================================
+# 6. IŠSAUGOME
+# ============================================
+isvedimo_kelias = "06_rezultatai/galutinis_modeliu_palyginimas_10000.csv"
+galutinis_df.to_csv(isvedimo_kelias, index=False, encoding="utf-8-sig")
+
+print("Galutinė modelių palyginimo lentelė išsaugota:")
+print(isvedimo_kelias)

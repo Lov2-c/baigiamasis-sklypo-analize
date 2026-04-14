@@ -1,0 +1,3 @@
+﻿accuracy,activation,alpha,balanced_accuracy,bandymo_nr,batch_size,early_stopping,f1_macro,f1_weighted,hidden_layer_sizes,learning_rate_init,max_iter,modelis,n_iter_no_change,precision_macro,precision_weighted,realios_iteracijos,recall_macro,recall_weighted,solver,test_eilutes,train_eilutes,validation_fraction
+0.998,,,0.9896,,,,0.9942,0.998,,,,RandomForest_10000,,0.999,0.998,,0.9896,0.998,,2497.0,7490.0,
+0.9992,tanh,0.0001,0.9975,21.0,32.0,1.0,0.9985,0.9992,"(64,)",0.0005,10000.0,MLP_10000_best,20.0,0.9996,0.9992,47.0,0.9975,0.9992,adam,,,0.2

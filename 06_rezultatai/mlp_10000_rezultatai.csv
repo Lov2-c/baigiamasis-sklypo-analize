@@ -1,0 +1,2 @@
+﻿modelis,hidden_layer_sizes,activation,solver,alpha,learning_rate_init,batch_size,max_iter,early_stopping,validation_fraction,n_iter_no_change,realios_iteracijos,accuracy,balanced_accuracy,precision_macro,recall_macro,f1_macro,precision_weighted,recall_weighted,f1_weighted,train_eilutes,test_eilutes
+MLP_10000,"(64, 32)",relu,adam,0.001,0.001,32,10000,True,0.2,20,31,0.996,0.9844,0.9977,0.9844,0.9909,0.996,0.996,0.996,7490,2497

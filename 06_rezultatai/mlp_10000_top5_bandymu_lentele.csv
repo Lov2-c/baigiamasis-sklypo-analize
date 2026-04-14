@@ -1,0 +1,6 @@
+﻿bandymo_nr,hidden_layer_sizes,activation,solver,alpha,learning_rate_init,batch_size,max_iter,early_stopping,validation_fraction,n_iter_no_change,realios_iteracijos,accuracy,balanced_accuracy,precision_macro,recall_macro,f1_macro,precision_weighted,recall_weighted,f1_weighted
+21,"(64,)",tanh,adam,0.0001,0.0005,32,10000,True,0.2,20,47,0.9992,0.9975,0.9996,0.9975,0.9985,0.9992,0.9992,0.9992
+23,"(64,)",tanh,adam,0.001,0.0005,32,10000,True,0.2,20,47,0.9988,0.9973,0.9975,0.9973,0.9974,0.9988,0.9988,0.9988
+12,"(32,)",relu,adam,0.001,0.001,32,10000,True,0.2,20,83,0.9988,0.9938,0.9994,0.9938,0.9966,0.9988,0.9988,0.9988
+22,"(64,)",tanh,adam,0.0001,0.001,32,10000,True,0.2,20,37,0.9984,0.9971,0.9955,0.9971,0.9963,0.9984,0.9984,0.9984
+24,"(64,)",tanh,adam,0.001,0.001,32,10000,True,0.2,20,37,0.9984,0.9971,0.9955,0.9971,0.9963,0.9984,0.9984,0.9984
