@@ -31,7 +31,35 @@ from ui_layer_texts import SLUOKSNIU_TEKSTAI
 # =========================================================
 
 PASKIRTIES_TIPU_REIKSMES = {
+    "610": "žemės ūkio paskirties žemė",
+    "710": "miškų ūkio paskirties žemė",
     "995": "kitos paskirties žemė",
+}
+
+PASKIRTIES_TIPU_PAAISKINIMAI = {
+    "610": (
+        "Šiuo metu sklypas registruotas kaip žemės ūkio paskirties žemė. "
+        "Tokios paskirties žemė pirmiausia skirta žemės ūkio veiklai, todėl įprasta gyvenamoji ar kita "
+        "intensyvesnė statyba joje paprastai nelaikoma tiesiogiai savaime galima. Praktikoje tokioje žemėje "
+        "gali būti aktualūs žemės ūkiui skirti statiniai, o kai kuriais atvejais – ir ūkininko sodybos "
+        "scenarijus ar kiti specialūs sprendiniai, tačiau galutinės galimybės priklauso nuo konkretaus "
+        "naudojimo būdo, sklypo ploto, bendrojo plano sprendinių ir papildomų ribojimų."
+    ),
+    "710": (
+        "Šiuo metu sklypas registruotas kaip miškų ūkio paskirties žemė. "
+        "Tokios paskirties žemė pirmiausia skirta miško išsaugojimui, tvarkymui ir naudojimui pagal miškų ūkio "
+        "reikalavimus. Įprasta nauja gyvenamoji ar kita intensyvi statyba tokioje žemėje paprastai nėra laikoma "
+        "pagrindine ir tiesiogiai numatoma kryptimi. Praktikoje gali būti aktualūs tik su miškų ūkiu, miško "
+        "priežiūra ar kita specialia paskirtimi susiję sprendiniai, o galutinės galimybės priklauso nuo konkrečių "
+        "teisinių reikalavimų ir papildomų ribojimų."
+    ),
+    "995": (
+        "Šiuo metu sklypas registruotas kaip kitos paskirties žemė. "
+        "Tai reiškia, kad galimų statinių pobūdis paprastai priklauso ne vien nuo bendro paskirties kodo, bet ir "
+        "nuo konkretaus žemės naudojimo būdo, bendrojo plano funkcinės zonos bei kitų taikomų ribojimų. Tokiuose "
+        "sklypuose gali būti aktuali gyvenamoji, paslaugų, komercinė, visuomeninė, inžinerinė ar kita statyba, "
+        "tačiau galutiniai sprendiniai turi būti vertinami pagal konkretų teritorijos planavimo kontekstą."
+    ),
 }
 
 PAGRINDINES_PASKIRTIES_REIKSMES = {
@@ -40,6 +68,49 @@ PAGRINDINES_PASKIRTIES_REIKSMES = {
     "M": "miškų ūkio",
     "V": "vandens ūkio",
     "K": "konservacinė",
+    "Z;KT": "žemės ūkio / kita",
+}
+
+PAGRINDINES_PASKIRTIES_PAAISKINIMAI = {
+    "KT": (
+        "Pagal bendrojo plano sprendinius teritorija orientuojama į kitos paskirties žemę. "
+        "Tai nereiškia vieno universalaus statinių tipo: konkretūs galimi sprendiniai priklauso nuo funkcinės zonos. "
+        "Jei teritorija patenka į gyvenamąją zoną, joje gali būti aktuali gyvenamoji statyba; jei į pramonės ir "
+        "sandėliavimo zoną – gamybiniai, sandėliavimo ar logistikos pastatai; jei į specializuotų kompleksų zoną – "
+        "specializuotos paskirties statiniai; jei į bendro naudojimo erdvių zoną – viešosios erdvės, želdynai ir su "
+        "jais susiję sprendiniai. Taigi ši reikšmė rodo ne vien dabartinę būseną, o planavimo kryptį, pagal kurią "
+        "teritorijoje galėtų būti vystoma kitos paskirties veikla."
+    ),
+    "ZU": (
+        "Pagal bendrojo plano sprendinius teritorija orientuojama į žemės ūkio paskirtį. "
+        "Tokiose teritorijose pagrindinė kryptis paprastai siejama su žemės ūkio veikla, todėl įprasta nauja "
+        "gyvenamoji ar kita intensyvi statyba paprastai nėra laikoma pagrindine vystymo kryptimi. Praktikoje gali "
+        "būti aktualūs žemės ūkio veiklai reikalingi statiniai, o tam tikrais atvejais – ir ūkininko sodybos ar "
+        "kiti specialūs sprendiniai, tačiau tai priklauso nuo papildomų sąlygų."
+    ),
+    "M": (
+        "Pagal bendrojo plano sprendinius teritorija orientuojama į miškų ūkio paskirtį. "
+        "Tokiose teritorijose prioritetas teikiamas miško išsaugojimui, tvarkymui ir naudojimui pagal miškų ūkio "
+        "principus, todėl įprasta nauja gyvenamoji ar kita intensyvi plėtra čia paprastai nėra numatoma. Praktikoje "
+        "galimi tik tie sprendiniai, kurie suderinami su miškų ūkio, aplinkosaugos ir kitais taikomais reikalavimais."
+    ),
+    "V": (
+        "Pagal bendrojo plano sprendinius teritorija orientuojama į vandens ūkio paskirtį. "
+        "Tokiose teritorijose pagrindinė kryptis siejama su vandens telkiniais, jų apsauga ir priežiūra, todėl "
+        "įprasta nauja gyvenamoji ar kita intensyvi statyba paprastai nėra laikoma pagrindine vystymo kryptimi."
+    ),
+    "K": (
+        "Pagal bendrojo plano sprendinius teritorija orientuojama į konservacinę paskirtį. "
+        "Tai reiškia, kad prioritetas teikiamas saugomų vertybių išsaugojimui, todėl naujos statybos ar intensyvaus "
+        "vystymo galimybės tokiose teritorijose paprastai būna labai stipriai ribotos."
+    ),
+    "Z;KT": (
+        "Pagal bendrojo plano sprendinius teritorijoje matoma mišri žemės ūkio ir kitos paskirties kryptis. "
+        "Tai reiškia, kad vien teritorijos vertinimas pagal dabartinę paskirtį nėra pakankamas: galutinė vystymo "
+        "kryptis priklauso nuo konkrečios funkcinės zonos, jos reglamentų ir kitų taikomų ribojimų. Praktikoje dalyje "
+        "tokios teritorijos gali išlikti žemės ūkio pobūdžio naudojimas, o kitur gali būti aktualūs kitos paskirties "
+        "sprendiniai, tačiau tai turi būti vertinama kartu su BP zonos turiniu."
+    ),
 }
 
 PDF_ZEMELAPIO_SPALVOS = {
@@ -157,6 +228,30 @@ def _suformuoti_pagrindine_paskirti(kodas) -> str:
         return f"{kodas_txt} – {paaiskinimas}"
     return kodas_txt
 
+def _gauti_dabartines_paskirties_paaiskinima(kodas) -> str:
+    kodas_txt = _tekstas(kodas, "")
+    tekstas = PASKIRTIES_TIPU_PAAISKINIMAI.get(kodas_txt)
+    if tekstas:
+        return _tekstas(tekstas)
+
+    return (
+        "Dabartinės pagrindinės žemės naudojimo paskirties paaiškinimas šiam kodui dar nėra parengtas. "
+        "Todėl galimos statybos ir naudojimo kryptys turi būti vertinamos pagal konkretų naudojimo būdą, "
+        "bendrojo plano sprendinius ir kitus taikomus ribojimus."
+    )
+
+
+def _gauti_bp_paskirties_paaiskinima(kodas) -> str:
+    kodas_txt = _tekstas(kodas, "")
+    tekstas = PAGRINDINES_PASKIRTIES_PAAISKINIMAI.get(kodas_txt)
+    if tekstas:
+        return _tekstas(tekstas)
+
+    return (
+        "Bendrojo plano pagrindinės paskirties paaiškinimas šiai reikšmei dar nėra atskirai parengtas. "
+        "Todėl teritorijos planavimo kryptis turi būti vertinama kartu su konkrečios funkcinės zonos turiniu "
+        "ir kitais taikomais teritorijos reglamentais."
+    )
 
 def _ml_paaiskinimas(ml_klase: str | None) -> str:
     ml_klase = _tekstas(ml_klase, "").strip()
@@ -473,14 +568,13 @@ def generuoti_pdf_ataskaita(
     story.append(ident_table)
     story.append(Spacer(1, 3 * mm))
 
-    if _tekstas(paskirties_tipas) == "995":
-        story.append(
-            Paragraph(
-                "Kitos paskirties žemėje statinių galimybė vertinama pagal konkrečią teritorijos naudojimo paskirtį, bendrojo plano sprendinius ir kitus taikomus ribojimus. Tokiuose sklypuose gali būti svarstomi gyvenamosios, komercinės, paslaugų, visuomeninės, ūkinės ar kitos paskirties statiniai, tačiau galutinis galimų statinių pobūdis priklauso ne vien nuo žemės paskirties kodo, o nuo konkrečios funkcinės zonos, planuojamos veiklos ir papildomų specialiųjų sąlygų.",
-                stilius_tekstas,
-            )
+    story.append(
+        Paragraph(
+            _gauti_dabartines_paskirties_paaiskinima(paskirties_tipas),
+            stilius_tekstas,
         )
-        story.append(Spacer(1, 2 * mm))
+    )
+    story.append(Spacer(1, 2 * mm))
 
     # 3. BP informacija
     story.append(Paragraph("2. Bendrojo plano santrauka", stilius_antraste))
@@ -496,7 +590,7 @@ def generuoti_pdf_ataskaita(
         ["Zonos kodas", _tekstas(bp_kodas)],
         ["Užstatymo intensyvumas", _tekstas(bp_intens)],
         ["Maks. aukštų skaičius", _tekstas(bp_aukstai)],
-        ["Pagrindinė paskirtis", _suformuoti_pagrindine_paskirti(bp_paskirtis)],
+        ["BP pagrindinė paskirtis", _suformuoti_pagrindine_paskirti(bp_paskirtis)],
     ]
 
     bp_table = Table(bp_data, colWidths=[55 * mm, 105 * mm])
@@ -523,7 +617,14 @@ def generuoti_pdf_ataskaita(
 
     if bp_zonos_tekstas:
         story.append(Paragraph(_tekstas(bp_zonos_tekstas), stilius_tekstas))
+        story.append(Spacer(1, 1 * mm))
 
+    story.append(
+        Paragraph(
+            _gauti_bp_paskirties_paaiskinima(bp_paskirtis),
+            stilius_tekstas,
+        )
+    )
     story.append(Spacer(1, 3 * mm))
 
     # 4. Automatinė analizė
